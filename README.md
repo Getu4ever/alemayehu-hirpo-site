@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Alemayehu Hirpo — Official Website
 
-## Getting Started
+Premium official website for Ethiopian singer and songwriter **Alemayehu Hirpo (አለማየሁ ሂርጶ)**.
 
-First, run the development server:
+Built with Next.js (App Router), TypeScript, Tailwind CSS, and a bilingual English / Amharic experience.
+
+## Stack
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Lucide icons
+- Google fonts: Cormorant Garamond (display), Outfit (body), Noto Sans Ethiopic (Amharic)
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Local development server |
+| `npm run build` | Production build |
+| `npm run start` | Serve production build |
+| `npm run lint` | ESLint |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+src/
+  app/                 # Routes (home, about, music, videos, news, events, gallery, contact)
+  components/          # Layout, home sections, feature modules, UI primitives
+  data/                # Centralized artist, releases, videos, news, events, gallery
+  i18n/                # EN/AM translations + language provider
+  lib/                 # Utilities and metadata helpers
+public/images/artist/  # Official photographs
+public/images/placeholders/
+docs/artist-research.md
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Content updates
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Edit structured data — do not hardcode facts into components:
 
-## Deploy on Vercel
+- `src/data/artist.ts` — name, bio, social, streaming, milestones, image paths
+- `src/data/releases.ts` — discography
+- `src/data/videos.ts` — video library
+- `src/data/news.ts` — articles (add entries for `/news/[slug]`)
+- `src/data/events.ts` — concerts (add entries for `/events/[slug]`)
+- `src/data/gallery.ts` — photo gallery
+- `src/i18n/translations.ts` — UI strings (EN / AM)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Research notes and verification status: `docs/artist-research.md`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Language switcher
+
+EN / አማ toggle in the header persists via `localStorage` (`ah-locale`) and updates `document.documentElement.lang`.
+
+## Contact & newsletter forms
+
+Forms validate on the client and show integration-ready success messaging. Before production:
+
+1. Add an API route (e.g. `src/app/api/contact/route.ts`) or a form service (Resend, Formspree, etc.).
+2. Wire `ContactForm` and `NewsletterSection` submit handlers to that endpoint.
+3. Add spam protection (honeypot / Turnstile / similar).
+4. Populate real booking and media emails in `src/data/artist.ts` when confirmed.
+
+## SEO
+
+- Per-page metadata via `createPageMetadata`
+- Open Graph / Twitter cards using artist photography
+- `src/app/sitemap.ts` and `src/app/robots.ts`
+- Update `metadataBase` in `src/app/layout.tsx` and sitemap/robots URLs when the production domain is confirmed (currently `https://www.alemayehu-hirpo.com` as a placeholder)
+
+## Deployment
+
+Deploy on Vercel (recommended):
+
+```bash
+npm run build
+```
+
+Or connect the Git repository to Vercel for continuous deployment. No secrets are required for the current static content site.
+
+## Design direction
+
+**Ethiopian Heritage Meets Contemporary Music** — charcoal cinematic surfaces, forest green depth, antique gold accents, ivory editorial sections, bilingual typography, artist photography as the visual centerpiece.
+
+## Remaining integrations
+
+- Official streaming URLs beyond Apple Music / SoundCloud (Spotify, YouTube Music)
+- Confirmed social accounts
+- Full discography artwork and tracklists
+- Official video embeds
+- Confirmed events and news posts
+- Form delivery backend
+- Production domain / analytics (optional)

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520" viewBox="0 0 1600 520" fill="none">
+  <defs>
+    <linearGradient id="ribbonShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-20%" width="120%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+    <linearGradient id="greenG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0a9f3c"/>
+      <stop offset="100%" stop-color="#078930"/>
+    </linearGradient>
+    <linearGradient id="yellowG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffe44d"/>
+      <stop offset="100%" stop-color="#fcdd09"/>
+    </linearGradient>
+    <linearGradient id="redG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ef2b33"/>
+      <stop offset="100%" stop-color="#da121a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Soft ground shadow -->
+  <ellipse cx="900" cy="470" rx="620" ry="28" fill="#000000" opacity="0.08"/>
+
+  <g filter="url(#softShadow)">
+    <!-- Flowing ribbon body: green / yellow / red bands -->
+    <!-- Green band -->
+    <path d="M-40 210
+      C120 140, 260 120, 420 165
+      C580 210, 720 250, 900 220
+      C1080 190, 1240 140, 1420 155
+      C1520 163, 1600 180, 1680 200
+      L1680 250
+      C1600 230, 1520 213, 1420 205
+      C1240 190, 1080 240, 900 270
+      C720 300, 580 260, 420 215
+      C260 170, 120 190, -40 260 Z"
+      fill="url(#greenG)"/>
+
+    <!-- Yellow band -->
+    <path d="M-40 250
+      C120 180, 260 160, 420 205
+      C580 250, 720 290, 900 260
+      C1080 230, 1240 180, 1420 195
+      C1520 203, 1600 220, 1680 240
+      L1680 300
+      C1600 280, 1520 263, 1420 255
+      C1240 240, 1080 290, 900 320
+      C720 350, 580 310, 420 265
+      C260 220, 120 240, -40 310 Z"
+      fill="url(#yellowG)"/>
+
+    <!-- Red band -->
+    <path d="M-40 300
+      C120 230, 260 210, 420 255
+      C580 300, 720 340, 900 310
+      C1080 280, 1240 230, 1420 245
+      C1520 253, 1600 270, 1680 290
+      L1680 360
+      C1600 340, 1520 323, 1420 315
+      C1240 300, 1080 350, 900 380
+      C720 410, 580 370, 420 325
+      C260 280, 120 300, -40 370 Z"
+      fill="url(#redG)"/>
+
+    <!-- Highlight overlay for depth -->
+    <path d="M-40 210
+      C120 140, 260 120, 420 165
+      C580 210, 720 250, 900 220
+      C1080 190, 1240 140, 1420 155
+      C1520 163, 1600 180, 1680 200
+      L1680 360
+      C1600 340, 1520 323, 1420 315
+      C1240 300, 1080 350, 900 380
+      C720 410, 580 370, 420 325
+      C260 280, 120 300, -40 370 Z"
+      fill="url(#ribbonShade)"/>
+  </g>
+
+  <!-- Emblem disc (left fold) -->
+  <g transform="translate(210,210)">
+    <circle cx="0" cy="0" r="58" fill="#0b5fad"/>
+    <circle cx="0" cy="0" r="52" fill="none" stroke="#fcdd09" stroke-width="2.5" opacity="0.9"/>
+    <!-- Star -->
+    <path d="M0,-28 L8,-8 L30,-8 L12,4 L18,26 L0,12 L-18,26 L-12,4 L-30,-8 L-8,-8 Z"
+      fill="#fcdd09"/>
+    <!-- Soft rays -->
+    <g stroke="#fcdd09" stroke-width="1.5" opacity="0.85">
+      <line x1="0" y1="-40" x2="0" y2="-48"/>
+      <line x1="24" y1="-32" x2="29" y2="-39"/>
+      <line x1="38" y1="-12" x2="46" y2="-15"/>
+      <line x1="38" y1="12" x2="46" y2="15"/>
+      <line x1="24" y1="32" x2="29" y2="39"/>
+      <line x1="0" y1="40" x2="0" y2="48"/>
+      <line x1="-24" y1="32" x2="-29" y2="39"/>
+      <line x1="-38" y1="12" x2="-46" y2="15"/>
+      <line x1="-38" y1="-12" x2="-46" y2="-15"/>
+      <line x1="-24" y1="-32" x2="-29" y2="-39"/>
+    </g>
+  </g>
+</svg>

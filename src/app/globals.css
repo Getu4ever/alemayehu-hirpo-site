@@ -1,26 +1,278 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Ethiopian heritage palette */
+  --ethio-green: #078930;
+  --ethio-green-deep: #056b24;
+  --ethio-green-soft: #0a9f3c;
+  --ethio-yellow: #fcdd09;
+  --ethio-yellow-soft: #ffe44d;
+  --ethio-red: #da121a;
+  --ethio-red-deep: #b50e15;
+
+  --background: #0a120c;
+  --foreground: #f7f3e8;
+  --surface: #122018;
+  --accent: #fcdd09;
+  --accent-foreground: #0a120c;
+  --muted: #a8b5a0;
+  --border: color-mix(in srgb, #078930 35%, transparent);
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --space-section: clamp(4.5rem, 10vw, 8rem);
+  --header-height: 4.5rem;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration: 400ms;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: #122018;
+  --color-accent: #fcdd09;
+  --color-accent-foreground: #0a120c;
+  --color-muted: #a8b5a0;
+  --color-border: color-mix(in srgb, #078930 35%, transparent);
+  --color-charcoal: #0a120c;
+  --color-charcoal-elevated: #122018;
+  --color-forest: #078930;
+  --color-forest-light: #0a9f3c;
+  --color-forest-deep: #056b24;
+  --color-gold: #fcdd09;
+  --color-gold-soft: #ffe44d;
+  --color-ivory: #f7f3e8;
+  --color-cream: #f3ecd8;
+  --color-brass: #d4b40a;
+  --color-ethio-green: #078930;
+  --color-ethio-yellow: #fcdd09;
+  --color-ethio-red: #da121a;
+  --color-ethio-red-deep: #b50e15;
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-ethiopic: var(--font-ethiopic);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), var(--font-ethiopic), system-ui, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, #fcdd09 55%, transparent);
+  color: #0a120c;
+}
+
+:lang(am),
+.amharic,
+[data-script="ethiopic"] {
+  font-family: var(--font-ethiopic), var(--font-body), sans-serif;
+  line-height: 1.75;
+  letter-spacing: 0;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-ethiopic), Georgia, serif;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.section-pad {
+  padding-block: var(--space-section);
+}
+
+/* Ethiopian tricolor stripe */
+.flag-stripe {
+  display: flex;
+  width: 100%;
+  height: 4px;
+  flex-shrink: 0;
+}
+
+.flag-stripe > span {
+  flex: 1;
+}
+
+.flag-stripe > span:nth-child(1) {
+  background: #078930;
+}
+.flag-stripe > span:nth-child(2) {
+  background: #fcdd09;
+}
+.flag-stripe > span:nth-child(3) {
+  background: #da121a;
+}
+
+.flag-stripe-vertical {
+  display: flex;
+  flex-direction: column;
+  width: 5px;
+  flex-shrink: 0;
+}
+
+.flag-stripe-vertical > span {
+  flex: 1;
+  min-height: 1.25rem;
+}
+
+.flag-stripe-vertical > span:nth-child(1) {
+  background: #078930;
+}
+.flag-stripe-vertical > span:nth-child(2) {
+  background: #fcdd09;
+}
+.flag-stripe-vertical > span:nth-child(3) {
+  background: #da121a;
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #078930 20%,
+    #fcdd09 50%,
+    #da121a 80%,
+    transparent
+  );
+}
+
+.gold-rule {
+  width: 4.5rem;
+  height: 3px;
+  background: linear-gradient(90deg, #078930 0%, #fcdd09 50%, #da121a 100%);
+}
+
+.texture-veil {
+  background-image:
+    radial-gradient(
+      ellipse 70% 50% at 80% 20%,
+      color-mix(in srgb, #078930 22%, transparent),
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 10% 80%,
+      color-mix(in srgb, #da121a 12%, transparent),
+      transparent 60%
+    );
+}
+
+.light-section {
+  background:
+    linear-gradient(
+      180deg,
+      #f7f3e8 0%,
+      color-mix(in srgb, #078930 6%, #f3ecd8) 100%
+    );
+  color: #0a120c;
+}
+
+.light-section .text-muted {
+  color: color-mix(in srgb, #0a120c 55%, transparent);
+}
+
+.ethio-mesh {
+  background-color: #0a120c;
+  background-image:
+    radial-gradient(
+      at 0% 0%,
+      color-mix(in srgb, #078930 28%, transparent) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      at 100% 100%,
+      color-mix(in srgb, #da121a 18%, transparent) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      at 50% 0%,
+      color-mix(in srgb, #fcdd09 8%, transparent) 0%,
+      transparent 40%
+    );
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up var(--duration) var(--ease-out) both;
+}
+
+.animate-fade-in {
+  animation: fade-in calc(var(--duration) * 1.2) var(--ease-out) both;
+}
+
+.delay-1 {
+  animation-delay: 80ms;
+}
+.delay-2 {
+  animation-delay: 160ms;
+}
+.delay-3 {
+  animation-delay: 240ms;
+}
+.delay-4 {
+  animation-delay: 320ms;
+}
+
+:focus-visible {
+  outline: 2px solid #fcdd09;
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a120c;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #078930;
+    border-radius: 999px;
+  }
 }

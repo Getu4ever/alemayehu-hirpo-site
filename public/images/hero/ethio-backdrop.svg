@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#021208"/>
+      <stop offset="28%" stop-color="#0a3218"/>
+      <stop offset="55%" stop-color="#1a0c14"/>
+      <stop offset="78%" stop-color="#3a1018"/>
+      <stop offset="100%" stop-color="#5a1420"/>
+    </linearGradient>
+    <radialGradient id="sunburst" cx="68%" cy="22%" r="48%">
+      <stop offset="0%" stop-color="#fcdd09" stop-opacity="0.42"/>
+      <stop offset="28%" stop-color="#fcdd09" stop-opacity="0.16"/>
+      <stop offset="55%" stop-color="#078930" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#078930" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="greenGlow" cx="78%" cy="55%" r="42%">
+      <stop offset="0%" stop-color="#0a9f3c" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#078930" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ember" cx="14%" cy="78%" r="46%">
+      <stop offset="0%" stop-color="#da121a" stop-opacity="0.48"/>
+      <stop offset="55%" stop-color="#da121a" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#da121a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="magentaEcho" cx="82%" cy="70%" r="35%">
+      <stop offset="0%" stop-color="#8b1a4a" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#8b1a4a" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="tibeb" width="110" height="110" patternUnits="userSpaceOnUse">
+      <path d="M55 6 L104 55 L55 104 L6 55 Z" fill="none" stroke="#fcdd09" stroke-width="1.2" opacity="0.11"/>
+      <path d="M55 22 L88 55 L55 88 L22 55 Z" fill="none" stroke="#078930" stroke-width="1" opacity="0.14"/>
+      <path d="M55 36 L74 55 L55 74 L36 55 Z" fill="none" stroke="#da121a" stroke-width="0.8" opacity="0.12"/>
+      <circle cx="55" cy="55" r="3" fill="#fcdd09" opacity="0.18"/>
+      <circle cx="0" cy="0" r="2" fill="#da121a" opacity="0.12"/>
+      <circle cx="110" cy="110" r="2" fill="#da121a" opacity="0.12"/>
+    </pattern>
+    <linearGradient id="beam" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#fcdd09" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#fcdd09" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#fcdd09" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <rect width="1920" height="1080" fill="url(#sunburst)"/>
+  <rect width="1920" height="1080" fill="url(#greenGlow)"/>
+  <rect width="1920" height="1080" fill="url(#ember)"/>
+  <rect width="1920" height="1080" fill="url(#magentaEcho)"/>
+  <rect width="1920" height="1080" fill="url(#tibeb)"/>
+
+  <!-- Soft light beams (left side, clear of portrait) -->
+  <g opacity="0.55">
+    <path d="M0 200 L720 480 L0 420 Z" fill="url(#beam)"/>
+    <path d="M0 360 L680 560 L0 540 Z" fill="#078930" opacity="0.06"/>
+    <path d="M0 520 L640 700 L0 680 Z" fill="#da121a" opacity="0.05"/>
+  </g>
+
+  <!-- Highland horizon — low, does not cross face -->
+  <path d="M0 860 C360 780 720 920 1080 840 C1400 770 1680 900 1920 820 L1920 1080 L0 1080 Z" fill="#078930" opacity="0.14"/>
+  <path d="M0 940 C400 880 820 1000 1240 920 C1520 870 1720 960 1920 900 L1920 1080 L0 1080 Z" fill="#da121a" opacity="0.1"/>
+
+  <!-- Vertical tricolor on far left -->
+  <rect x="0" y="0" width="12" height="1080" fill="#078930"/>
+  <rect x="12" y="0" width="12" height="1080" fill="#fcdd09"/>
+  <rect x="24" y="0" width="12" height="1080" fill="#da121a"/>
+
+  <!-- Bottom glow bar -->
+  <rect x="0" y="1048" width="640" height="8" fill="#078930" opacity="0.7"/>
+  <rect x="640" y="1048" width="640" height="8" fill="#fcdd09" opacity="0.7"/>
+  <rect x="1280" y="1048" width="640" height="8" fill="#da121a" opacity="0.7"/>
+</svg>
