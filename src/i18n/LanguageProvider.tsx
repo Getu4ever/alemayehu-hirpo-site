@@ -44,7 +44,7 @@ function writeLocale(next: Locale) {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const locale = useSyncExternalStore(subscribe, readLocale, () => "en");
+  const locale = useSyncExternalStore<Locale>(subscribe, readLocale, () => "en");
 
   const setLocale = useCallback((next: Locale) => {
     writeLocale(next);
