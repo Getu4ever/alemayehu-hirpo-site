@@ -8,7 +8,7 @@ import { FeaturedVideoEmbed } from "./FeaturedVideoEmbed";
 
 export const metadata = createPageMetadata({
   title: "Videos",
-  description: `Official music videos, lyric videos, and performances from ${artist.name.en}.`,
+  description: `Official music videos, lyric videos, and interviews from ${artist.name.en}.`,
   path: "/videos",
 });
 
@@ -18,13 +18,13 @@ export default function VideosPage() {
   return (
     <>
       <PageHero
-        eyebrow="Film & Performance"
+        eyebrow="Film & Song"
         title="Video"
         titleAccent="Archive"
         titleAm="ቪዲዮ"
         titleAccentAm="ማህደር"
-        description="Music videos, lyric videos, live performances, and interviews."
-        descriptionAm="ሙዚቃ ቪዲዮዎች፣ የግጥም ቪዲዮዎች፣ ቀጥታ ትርኢቶች እና ቃለ መጠይቆች።"
+        description="Music videos, new singles, lyric videos, and interviews."
+        descriptionAm="ሙዚቃ ቪዲዮዎች፣ አዲስ ሲንግሎች፣ የግጥም ቪዲዮዎች እና ቃለ መጠይቆች።"
       />
       <section className="section-pad pt-0">
         <Container>

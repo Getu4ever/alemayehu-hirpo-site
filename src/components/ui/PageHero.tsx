@@ -92,14 +92,14 @@ export function PageHero({
         )}
       >
         {eyebrow ? (
-          <p className="text-[0.65rem] sm:text-xs uppercase tracking-[0.28em] text-brass mb-3">
+          <p className="animate-fade-up text-[0.65rem] sm:text-xs uppercase tracking-[0.28em] text-brass mb-3">
             {eyebrow}
           </p>
         ) : null}
 
         <h1
           className={cn(
-            "font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.08]",
+            "animate-fade-up-delay font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.08]",
             locale === "am" && "amharic",
           )}
         >
@@ -115,7 +115,7 @@ export function PageHero({
         {displayDesc ? (
           <p
             className={cn(
-              "mt-3 sm:mt-4 text-sm sm:text-base text-ivory/65 max-w-xl leading-relaxed",
+              "animate-fade-up-delay mt-3 sm:mt-4 text-sm sm:text-base text-ivory/65 max-w-xl leading-relaxed",
               align === "center" && "mx-auto",
               locale === "am" && "amharic",
             )}

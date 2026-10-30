@@ -7,6 +7,7 @@ import { NowPlayingBar } from "@/components/music/NowPlayingBar";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Preloader } from "./Preloader";
+import { PageTransition } from "./PageTransition";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
@@ -14,7 +15,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <MusicPlayerProvider>
         <Preloader />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
         <NowPlayingBar />
       </MusicPlayerProvider>

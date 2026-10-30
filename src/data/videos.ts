@@ -151,6 +151,55 @@ export const videos: Video[] = [
     verified: true,
   },
   {
+    id: "interview-seifu-baytewar",
+    title: {
+      en: "Interview on Seifu — Baytewar & Exile Years",
+      am: "ከሰይፉ ጋር ቃለ መጠይቅ — ባይተዋርና የስደት ዓመታት",
+    },
+    description: {
+      en: "Alemayehu Hirpo speaks with Seifu about Baytewar and nearly two decades in exile.",
+      am: "አለማየሁ ሂርጶ ከሰይፉ ጋር ስለ ባይተዋርና በስደት ስለተገኙ ዓመታት ይናገራል።",
+    },
+    category: "interview",
+    ...yt("_AJGebIsf1U"),
+    releaseDate: null,
+    verified: true,
+  },
+  {
+    id: "interview-shai-seat",
+    title: {
+      en: "Tea Time Interview — Artist Alemayehu Hirpo",
+      am: "የሻይ ሰዓት ቃለ መጠይቅ — አርቲስት አለማየሁ ሂርጶ",
+    },
+    description: {
+      en: "Saturday afternoon conversation on life, music, and moments that tested him.",
+      am: "በቅዳሜ ከሰዓት ስለ ሕይወት፣ ሙዚቃ እና ስላሳለፈባቸው ጊዜያት የተደረገ ውይይት።",
+    },
+    category: "interview",
+    ...yt("6AudwDV1TfU"),
+    releaseDate: null,
+    verified: true,
+  },
+  {
+    id: "interview-ethiopikalink",
+    title: {
+      en: "Ethiopikalink Interview — Alemayehu Hirpo",
+      am: "የኢትዮጲካሊንክ ቃለ ምልልስ — ዓለማየሁ ሂርጶ",
+    },
+    description: {
+      en: "In-depth Ethiopikalink interview on survival, music, and resilience.",
+      am: "በኢትዮጲካሊንክ የተደረገ ጥልቅ ቃለ ምልልስ ስለ ሕይወት፣ ሙዚቃና ጽናት።",
+    },
+    category: "interview",
+    ...yt("_486xH5AqOY"),
+    releaseDate: null,
+    verified: true,
+  },
+];
+
+/** Live performance clips — shown on /events under Past Performances */
+export const pastPerformanceVideos: Video[] = [
+  {
     id: "baytewar-live-2025",
     title: {
       en: "Baytewar — Live Performance",
@@ -240,51 +289,6 @@ export const videos: Video[] = [
     releaseDate: null,
     verified: true,
   },
-  {
-    id: "interview-seifu-baytewar",
-    title: {
-      en: "Interview on Seifu — Baytewar & Exile Years",
-      am: "ከሰይፉ ጋር ቃለ መጠይቅ — ባይተዋርና የስደት ዓመታት",
-    },
-    description: {
-      en: "Alemayehu Hirpo speaks with Seifu about Baytewar and nearly two decades in exile.",
-      am: "አለማየሁ ሂርጶ ከሰይፉ ጋር ስለ ባይተዋርና በስደት ስለተገኙ ዓመታት ይናገራል።",
-    },
-    category: "interview",
-    ...yt("_AJGebIsf1U"),
-    releaseDate: null,
-    verified: true,
-  },
-  {
-    id: "interview-shai-seat",
-    title: {
-      en: "Tea Time Interview — Artist Alemayehu Hirpo",
-      am: "የሻይ ሰዓት ቃለ መጠይቅ — አርቲስት አለማየሁ ሂርጶ",
-    },
-    description: {
-      en: "Saturday afternoon conversation on life, music, and moments that tested him.",
-      am: "በቅዳሜ ከሰዓት ስለ ሕይወት፣ ሙዚቃ እና ስላሳለፈባቸው ጊዜያት የተደረገ ውይይት።",
-    },
-    category: "interview",
-    ...yt("6AudwDV1TfU"),
-    releaseDate: null,
-    verified: true,
-  },
-  {
-    id: "interview-ethiopikalink",
-    title: {
-      en: "Ethiopikalink Interview — Alemayehu Hirpo",
-      am: "የኢትዮጲካሊንክ ቃለ ምልልስ — ዓለማየሁ ሂርጶ",
-    },
-    description: {
-      en: "In-depth Ethiopikalink interview on survival, music, and resilience.",
-      am: "በኢትዮጲካሊንክ የተደረገ ጥልቅ ቃለ ምልልስ ስለ ሕይወት፣ ሙዚቃና ጽናት።",
-    },
-    category: "interview",
-    ...yt("_486xH5AqOY"),
-    releaseDate: null,
-    verified: true,
-  },
 ];
 
 export const videoCategories: {
@@ -295,7 +299,6 @@ export const videoCategories: {
   { id: "new-single", label: { en: "New Singles", am: "አዲስ ሲንግሎች" } },
   { id: "music-video", label: { en: "Music Videos", am: "ሙዚቃ ቪዲዮዎች" } },
   { id: "lyric", label: { en: "Lyric Videos", am: "የግጥም ቪዲዮዎች" } },
-  { id: "live", label: { en: "Live", am: "ቀጥታ" } },
   { id: "interview", label: { en: "Interviews", am: "ቃለ መጠይቆች" } },
   {
     id: "behind-the-scenes",
