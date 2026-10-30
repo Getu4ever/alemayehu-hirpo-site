@@ -1,4 +1,4 @@
-import { connection } from "next/server";
+import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
 import { artist } from "@/data/artist";
 import { readApprovedFanGallery } from "@/lib/fan-gallery";
@@ -13,10 +13,12 @@ export const metadata = createPageMetadata({
   path: "/gallery",
 });
 
-export default async function GalleryPage() {
-  await connection();
+async function ApprovedFanGallery() {
   const fanItems = await readApprovedFanGallery();
+  return <GalleryGrid fanItems={fanItems} />;
+}
 
+export default function GalleryPage() {
   return (
     <>
       <PageHero
@@ -31,7 +33,9 @@ export default async function GalleryPage() {
       />
       <section className="section-pad pt-0">
         <Container>
-          <GalleryGrid fanItems={fanItems} />
+          <Suspense fallback={<GalleryGrid fanItems={[]} />}>
+            <ApprovedFanGallery />
+          </Suspense>
           <FanPhotoSubmit />
         </Container>
       </section>
