@@ -20,10 +20,17 @@ export function VideoGrid() {
     return videos.filter((v) => v.category === filter);
   }, [filter]);
 
+  const visibleCategories = useMemo(() => {
+    return videoCategories.filter(
+      (cat) =>
+        cat.id === "all" || videos.some((video) => video.category === cat.id),
+    );
+  }, []);
+
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-10" role="tablist">
-        {videoCategories.map((cat) => (
+        {visibleCategories.map((cat) => (
           <button
             key={cat.id}
             type="button"
