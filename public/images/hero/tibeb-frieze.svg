@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d4b40a" stop-opacity="0"/>
+      <stop offset="12%" stop-color="#d4b40a" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#f3ebd8" stop-opacity="0.35"/>
+      <stop offset="88%" stop-color="#d4b40a" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#d4b40a" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Center hairline -->
+  <rect x="0" y="23" width="1440" height="1" fill="url(#fade)"/>
+  <!-- Repeating tibeb diamonds (Ethiopian textile motif) -->
+  <g stroke="#d4b40a" stroke-width="1" fill="none" opacity="0.7">
+    <g transform="translate(120 24)">
+      <path d="M0,-10 L10,0 L0,10 L-10,0 Z"/>
+      <path d="M0,-5 L5,0 L0,5 L-5,0 Z" opacity="0.6"/>
+    </g>
+    <g transform="translate(240 24)">
+      <path d="M0,-8 L8,0 L0,8 L-8,0 Z"/>
+      <circle cx="0" cy="0" r="2" fill="#d4b40a" stroke="none" opacity="0.5"/>
+    </g>
+    <g transform="translate(360 24)">
+      <path d="M0,-10 L10,0 L0,10 L-10,0 Z"/>
+      <path d="M0,-5 L5,0 L0,5 L-5,0 Z" opacity="0.6"/>
+    </g>
+    <g transform="translate(480 24)">
+      <path d="M0,-8 L8,0 L0,8 L-8,0 Z"/>
+      <circle cx="0" cy="0" r="2" fill="#d4b40a" stroke="none" opacity="0.5"/>
+    </g>
+    <g transform="translate(600 24)">
+      <path d="M0,-10 L10,0 L0,10 L-10,0 Z"/>
+      <path d="M0,-5 L5,0 L0,5 L-5,0 Z" opacity="0.6"/>
+    </g>
+    <g transform="translate(720 24)">
+      <path d="M0,-11 L11,0 L0,11 L-11,0 Z"/>
+      <path d="M0,-6 L6,0 L0,6 L-6,0 Z"/>
+      <circle cx="0" cy="0" r="1.5" fill="#f3ebd8" stroke="none"/>
+    </g>
+    <g transform="translate(840 24)">
+      <path d="M0,-10 L10,0 L0,10 L-10,0 Z"/>
+      <path d="M0,-5 L5,0 L0,5 L-5,0 Z" opacity="0.6"/>
+    </g>
+    <g transform="translate(960 24)">
+      <path d="M0,-8 L8,0 L0,8 L-8,0 Z"/>
+      <circle cx="0" cy="0" r="2" fill="#d4b40a" stroke="none" opacity="0.5"/>
+    </g>
+    <g transform="translate(1080 24)">
+      <path d="M0,-10 L10,0 L0,10 L-10,0 Z"/>
+      <path d="M0,-5 L5,0 L0,5 L-5,0 Z" opacity="0.6"/>
+    </g>
+    <g transform="translate(1200 24)">
+      <path d="M0,-8 L8,0 L0,8 L-8,0 Z"/>
+      <circle cx="0" cy="0" r="2" fill="#d4b40a" stroke="none" opacity="0.5"/>
+    </g>
+    <g transform="translate(1320 24)">
+      <path d="M0,-10 L10,0 L0,10 L-10,0 Z"/>
+      <path d="M0,-5 L5,0 L0,5 L-5,0 Z" opacity="0.6"/>
+    </g>
+  </g>
+</svg>

@@ -16,8 +16,10 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Connect"
-        title="Contact"
+        title="Get in"
+        titleAccent="Touch"
         titleAm="ያግኙን"
+        titleAccentAm="አሁን"
         description="Concert bookings, media requests, partnerships, and fan inquiries."
         descriptionAm="የኮንሰርት ቦታ ማስያዝ፣ የሚዲያ ጥያቄዎች፣ አጋርነቶች እና የደጋፊ ጥያቄዎች።"
       />

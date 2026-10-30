@@ -19,8 +19,10 @@ export default function VideosPage() {
     <>
       <PageHero
         eyebrow="Film & Performance"
-        title="Videos"
-        titleAm="ቪዲዮዎች"
+        title="Video"
+        titleAccent="Archive"
+        titleAm="ቪዲዮ"
+        titleAccentAm="ማህደር"
         description="Music videos, lyric videos, live performances, and interviews."
         descriptionAm="ሙዚቃ ቪዲዮዎች፣ የግጥም ቪዲዮዎች፣ ቀጥታ ትርኢቶች እና ቃለ መጠይቆች።"
       />

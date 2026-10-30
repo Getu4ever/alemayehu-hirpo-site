@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 360" fill="none" role="img" aria-hidden="true">
+  <defs>
+    <radialGradient id="aura" cx="50%" cy="48%" r="55%">
+      <stop offset="0%" stop-color="#d4b40a" stop-opacity="0.32"/>
+      <stop offset="50%" stop-color="#8a6a10" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#021208" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="face" cx="38%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#a88830"/>
+      <stop offset="42%" stop-color="#534214"/>
+      <stop offset="100%" stop-color="#161008"/>
+    </radialGradient>
+    <radialGradient id="boss" cx="36%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#fff6c4"/>
+      <stop offset="48%" stop-color="#d4b40a"/>
+      <stop offset="100%" stop-color="#5a4606"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff3b8"/>
+      <stop offset="45%" stop-color="#e0c020"/>
+      <stop offset="100%" stop-color="#7a6008"/>
+    </linearGradient>
+    <linearGradient id="ringStroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f3ebd8" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#d4b40a" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#f3ebd8" stop-opacity="0.35"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+
+    <symbol id="gasha" viewBox="-100 -100 200 200">
+      <circle r="93" fill="url(#face)" stroke="url(#rim)" stroke-width="5.5" filter="url(#soft)"/>
+      <circle r="84" stroke="#f3ebd8" stroke-opacity="0.32" stroke-width="1.1" fill="none"/>
+      <circle r="70" stroke="#e0c020" stroke-opacity="0.72" stroke-width="2" fill="none"/>
+      <circle r="55" stroke="#f3ebd8" stroke-opacity="0.25" stroke-width="1" fill="none"/>
+      <circle r="42" stroke="#e0c020" stroke-opacity="0.5" stroke-width="1.4" fill="none"/>
+
+      <g fill="#e0c020" fill-opacity="0.32" stroke="#f3ebd8" stroke-width="0.95" stroke-opacity="0.7">
+        <path d="M0,-66 C14,-54 14,-40 0,-31 C-14,-40 -14,-54 0,-66Z"/>
+        <path d="M0,-66 C14,-54 14,-40 0,-31 C-14,-40 -14,-54 0,-66Z" transform="rotate(45)"/>
+        <path d="M0,-66 C14,-54 14,-40 0,-31 C-14,-40 -14,-54 0,-66Z" transform="rotate(90)"/>
+        <path d="M0,-66 C14,-54 14,-40 0,-31 C-14,-40 -14,-54 0,-66Z" transform="rotate(135)"/>
+        <path d="M0,-66 C14,-54 14,-40 0,-31 C-14,-40 -14,-54 0,-66Z" transform="rotate(180)"/>
+        <path d="M0,-66 C14,-54 14,-40 0,-31 C-14,-40 -14,-54 0,-66Z" transform="rotate(225)"/>
+        <path d="M0,-66 C14,-54 14,-40 0,-31 C-14,-40 -14,-54 0,-66Z" transform="rotate(270)"/>
+        <path d="M0,-66 C14,-54 14,-40 0,-31 C-14,-40 -14,-54 0,-66Z" transform="rotate(315)"/>
+      </g>
+
+      <g stroke="#f3ebd8" stroke-opacity="0.28" stroke-width="0.85" fill="none">
+        <path d="M0,-46 L0,46 M-46,0 L46,0"/>
+        <path d="M-32,-32 L32,32 M-32,32 L32,-32"/>
+      </g>
+
+      <g fill="#f3ebd8">
+        <circle cx="0" cy="-89" r="2.8"/>
+        <circle cx="34" cy="-82" r="2.2"/>
+        <circle cx="63" cy="-63" r="2.8"/>
+        <circle cx="82" cy="-34" r="2.2"/>
+        <circle cx="89" cy="0" r="2.8"/>
+        <circle cx="82" cy="34" r="2.2"/>
+        <circle cx="63" cy="63" r="2.8"/>
+        <circle cx="34" cy="82" r="2.2"/>
+        <circle cx="0" cy="89" r="2.8"/>
+        <circle cx="-34" cy="82" r="2.2"/>
+        <circle cx="-63" cy="63" r="2.8"/>
+        <circle cx="-82" cy="34" r="2.2"/>
+        <circle cx="-89" cy="0" r="2.8"/>
+        <circle cx="-82" cy="-34" r="2.2"/>
+        <circle cx="-63" cy="-63" r="2.8"/>
+        <circle cx="-34" cy="-82" r="2.2"/>
+      </g>
+
+      <circle r="20" fill="url(#boss)" stroke="#fff3b8" stroke-width="1.8"/>
+      <circle r="9.5" fill="#100c05" fill-opacity="0.55" stroke="#e0c020" stroke-width="1.3"/>
+      <circle r="3.4" fill="#fff3b8"/>
+    </symbol>
+  </defs>
+
+  <ellipse cx="210" cy="175" rx="185" ry="160" fill="url(#aura)"/>
+
+  <!-- Side gasha — smaller, lightly overlapping the center -->
+  <use href="#gasha" x="8" y="80" width="176" height="176" opacity="0.88"/>
+  <use href="#gasha" x="236" y="80" width="176" height="176" opacity="0.88"/>
+
+  <!-- Lead gasha — larger, in front -->
+  <use href="#gasha" x="82" y="44" width="256" height="256"/>
+
+  <path d="M130 330 C170 340 250 340 290 330" stroke="#d4b40a" stroke-opacity="0.4" stroke-width="1"/>
+  <circle cx="210" cy="335" r="2" fill="#d4b40a" fill-opacity="0.7"/>
+</svg>

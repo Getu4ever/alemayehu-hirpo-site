@@ -2,6 +2,10 @@ export type Track = {
   number: number;
   title: { en: string; am?: string };
   duration?: string;
+  /** SoundCloud permalink — preferred playable source */
+  soundcloudUrl?: string;
+  /** YouTube video id — fallback when SoundCloud is unavailable */
+  youtubeId?: string;
 };
 
 export type Release = {
@@ -38,15 +42,37 @@ export const releases: Release[] = [
     },
     artists: ["Gossaye Tesfaye", "Alemayehu Hirpo"],
     tracks: [
-      { number: 1, title: { en: "Bayetware", am: "ባይተዋር" } },
-      { number: 2, title: { en: "Yasebshale", am: "ያስብሻል" } },
-      { number: 3, title: { en: "Ataker Keri" } },
-      { number: 4, title: { en: "Gena Ahune", am: "ገና አሁን" } },
+      {
+        number: 1,
+        title: { en: "Bayetware", am: "ባይተዋር" },
+        duration: "5:39",
+        soundcloudUrl: "https://soundcloud.com/alemayehu_hirpo/baytewar",
+        youtubeId: "lXQHgR2qqpo",
+      },
+      {
+        number: 2,
+        title: { en: "Yasebshale", am: "ያስብሻል" },
+        duration: "6:44",
+        soundcloudUrl: "https://soundcloud.com/alemayehu_hirpo/yasbeshal",
+        youtubeId: "J4C3v79dwiQ",
+      },
+      {
+        number: 3,
+        title: { en: "Ataker Keri", am: "አታቀርቅሪ" },
+        duration: "5:16",
+        youtubeId: "g86Lg26G5E0",
+      },
+      {
+        number: 4,
+        title: { en: "Gena Ahune", am: "ገና አሁን" },
+        duration: "5:13",
+        youtubeId: "_2w7D5FtJhs",
+      },
     ],
     streaming: {
       appleMusic: "https://music.apple.com/us/album/evangadi/1449995177",
       spotify: null,
-      soundcloud: "https://soundcloud.com/alemayehu_hirpo",
+      soundcloud: "https://soundcloud.com/alemayehu_hirpo/sets/alemayehu-hirpo",
       youtube: "https://www.youtube.com/@AlemayehuHirpoET",
     },
     featured: true,

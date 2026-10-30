@@ -8,9 +8,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/about",
     "/music",
+    "/tour",
     "/videos",
     "/news",
     "/events",
+    "/shop",
     "/gallery",
     "/contact",
   ].map((path) => ({

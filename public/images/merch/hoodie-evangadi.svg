@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img">
+  <rect width="600" height="600" fill="#0e1411"/>
+  <path d="M220 150 C240 110 360 110 380 150 C400 190 400 230 300 245 C200 230 200 190 220 150 Z" fill="#1a2420"/>
+  <path d="M240 155 C255 130 345 130 360 155 C370 185 360 215 300 225 C240 215 230 185 240 155 Z" fill="#0e1411"/>
+  <path d="M175 230 L210 210 L240 230 L240 490 L360 490 L360 230 L390 210 L425 230 L455 280 L420 310 L400 295 L400 490 L200 490 L200 295 L180 310 L145 280 Z" fill="#1e2a24"/>
+  <path d="M240 230 L360 230 L360 490 L240 490 Z" fill="#24302a"/>
+  <path d="M250 360 L350 360 L340 420 L260 420 Z" fill="#1a2420"/>
+  <text x="300" y="310" text-anchor="middle" fill="#d4b40a" font-family="Georgia, serif" font-size="24" letter-spacing="4">EVANGADI</text>
+  <text x="300" y="340" text-anchor="middle" fill="#f3ebd8" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="5" opacity="0.75">HOODIE</text>
+</svg>

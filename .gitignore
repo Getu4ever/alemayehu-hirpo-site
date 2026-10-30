@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# fan photo submissions (pending uploads — approved images live in public/)
+/data/fan-submissions/

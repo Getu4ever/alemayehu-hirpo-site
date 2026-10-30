@@ -17,9 +17,12 @@ export default function NewsPage() {
       <PageHero
         eyebrow="Updates"
         title="News"
+        titleAccent="Updates"
         titleAm="ዜና"
+        titleAccentAm="ማሻሻያ"
         description="Music announcements, interviews, and official statements."
         descriptionAm="የሙዚቃ ማስታወቂያዎች፣ ቃለ መጠይቆች እና ይፋዊ መግለጫዎች።"
+        image="/images/page-heroes/news.svg"
       />
       <section className="section-pad pt-0">
         <Container>

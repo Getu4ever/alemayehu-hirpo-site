@@ -42,7 +42,7 @@ export const events: EventItem[] = [
       en: "Live Band Night featuring Alemayehu Hirpo with Dibekulu, Akila, Fiker, and Milkisa. Bole Atlas, Chechnya Rd (in front of NB Business Center). Doors open 8 PM.",
       am: "ላይቭ ባንድ ምሽት — አለማየሁ ሂርጶ ከድበኩሉ፣ አኪላ፣ ፍቅር እና ሚልኪሳ ጋር። ቦሌ አትላስ ቼችኒያ መንገድ (ከኤንቢ ቢዝነስ ሴንተር ፊት ለፊት)። በር ይከፈታል ምሽት 2 ሰዓት።",
     },
-    status: "upcoming",
+    status: "past",
     image: "/images/events/palmy-2026-10-26.jpg",
     verified: true,
   },

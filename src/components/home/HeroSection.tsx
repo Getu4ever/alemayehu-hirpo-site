@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Container";
 
 export function HeroSection() {
   const { t, bilingual, locale } = useLanguage();
+  const streaming = artist.streaming.filter((s) => s.url);
 
   return (
     <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-[#021208]">
@@ -21,52 +22,61 @@ export function HeroSection() {
           className="object-cover"
           aria-hidden
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#021208]/90 via-[#021208]/40 to-transparent lg:via-[#021208]/20 lg:to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#021208]/75 via-[#021208]/25 to-transparent" />
+        {/* Highland dawn — warm gold through forest into ember */}
         <div
-          className="absolute right-[5%] top-[10%] h-[75%] w-[50%] rounded-full blur-3xl opacity-40 pointer-events-none"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              "radial-gradient(circle, rgba(252,221,9,0.18) 0%, rgba(7,137,48,0.14) 40%, transparent 70%)",
+            background: `
+              radial-gradient(ellipse 55% 45% at 72% 18%, rgba(212,180,10,0.22), transparent 60%),
+              radial-gradient(ellipse 40% 50% at 8% 70%, rgba(7,137,48,0.18), transparent 55%),
+              radial-gradient(ellipse 45% 40% at 90% 85%, rgba(180,40,48,0.16), transparent 50%)
+            `,
           }}
           aria-hidden
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#021208]/92 via-[#021208]/45 to-transparent lg:via-[#021208]/25 lg:to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#021208]/8 via-[#021208]/3 to-transparent" />
       </div>
 
-      {/* Compact emblem accent — top right */}
+      {/* Adwa seal — sits right of copy, left of portrait */}
       <div
-        className="absolute top-[5rem] right-5 sm:right-8 lg:right-12 z-20 pointer-events-none"
+        className="pointer-events-none absolute left-[62%] top-[26%] z-[5] hidden w-[11rem] -translate-x-1/2 select-none md:block lg:left-[60%] lg:top-[24%] lg:w-[12.5rem] xl:left-[58%] xl:w-[13.5rem]"
         aria-hidden
       >
-        <div className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-[#0b5fad] shadow-[0_8px_24px_rgba(0,0,0,0.35)] ring-2 ring-ethio-yellow/80 flex items-center justify-center">
-          <svg viewBox="0 0 64 64" className="h-9 w-9 sm:h-10 sm:w-10" fill="none">
-            <path
-              d="M32 10 L36.5 24 H51 L39.5 33 L44 47 L32 38 L20 47 L24.5 33 L13 24 H27.5 Z"
-              fill="#fcdd09"
-            />
-            <g stroke="#fcdd09" strokeWidth="1.4" opacity="0.9">
-              <line x1="32" y1="4" x2="32" y2="8" />
-              <line x1="48" y1="12" x2="45.5" y2="15" />
-              <line x1="56" y1="28" x2="52" y2="29.5" />
-              <line x1="56" y1="40" x2="52" y2="38.5" />
-              <line x1="48" y1="52" x2="45.5" y2="49" />
-              <line x1="32" y1="60" x2="32" y2="56" />
-              <line x1="16" y1="52" x2="18.5" y2="49" />
-              <line x1="8" y1="40" x2="12" y2="38.5" />
-              <line x1="8" y1="28" x2="12" y2="29.5" />
-              <line x1="16" y1="12" x2="18.5" y2="15" />
-            </g>
-          </svg>
-        </div>
-        <div className="mx-auto mt-2 flex h-1.5 w-10 overflow-hidden rounded-full">
-          <span className="flex-1 bg-ethio-green" />
-          <span className="flex-1 bg-ethio-yellow" />
-          <span className="flex-1 bg-ethio-red" />
+        <div className="relative opacity-[0.55] lg:opacity-[0.62]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero/adwa-shields.svg"
+            alt=""
+            className="mx-auto w-full"
+          />
+          <div className="-mt-2 text-center">
+            <p className="amharic text-xl leading-none tracking-wide text-brass lg:text-[1.55rem]">
+              አድዋ
+            </p>
+            <p className="mt-1 font-display text-[0.65rem] font-semibold tracking-[0.36em] text-brass/75">
+              ADWA
+            </p>
+            <p className="mt-0.5 text-[0.5rem] uppercase tracking-[0.28em] text-ivory/40">
+              The African Victory · 1896
+            </p>
+          </div>
         </div>
       </div>
 
+      {/* Soft light shafts — highland morning */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[2] opacity-30 mix-blend-screen"
+        style={{
+          backgroundImage: `
+            linear-gradient(105deg, transparent 0%, transparent 42%, rgba(252,221,9,0.07) 50%, transparent 58%, transparent 100%),
+            linear-gradient(118deg, transparent 0%, transparent 55%, rgba(7,137,48,0.05) 62%, transparent 70%)
+          `,
+        }}
+        aria-hidden
+      />
+
       <div className="relative flex-1 flex items-end min-h-[100svh]">
-        {/* Large high-res cutout from alemayehu03 */}
         <div className="absolute inset-y-0 right-0 w-full sm:w-[75%] lg:w-[62%] xl:w-[58%] z-10 flex items-end justify-end pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -76,43 +86,60 @@ export function HeroSection() {
           />
         </div>
 
-        <Container className="relative z-20 pb-16 pt-28 md:pb-24 md:pt-36 w-full">
+        <Container className="relative z-20 pb-16 pt-36 md:pb-24 md:pt-44 w-full">
           <div className="max-w-lg lg:max-w-xl">
-            <p className="animate-fade-up mb-5 text-xs sm:text-sm text-ivory/75">
-              <span className="uppercase tracking-[0.22em] text-ethio-yellow">
-                Official Website
-              </span>
-              <span className="mx-2 text-ethio-green">·</span>
-              <span className="amharic">ይፋዊ ድረ-ገጽ</span>
+            <p className="animate-fade-up mb-5 text-xs uppercase tracking-[0.22em] text-brass">
+              {t.heroEyebrow}
             </p>
 
-            <h1 className="animate-fade-up delay-1 font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-ivory leading-[0.95]">
-              ALEMAYEHU
-              <br />
-              HIRPO
+            <h1 className="animate-fade-up delay-1 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ivory leading-[1.05] font-bold">
+              {locale === "am" ? (
+                <span className="amharic" lang="am">
+                  {artist.tagline.am}
+                </span>
+              ) : (
+                <>
+                  The Sound of
+                  <br />
+                  <span className="text-brass">Ethiopian</span> Soul
+                </>
+              )}
             </h1>
-            <p
-              className="animate-fade-up delay-2 amharic text-2xl sm:text-3xl md:text-4xl text-ethio-yellow mt-3"
-              lang="am"
-            >
-              {artist.name.am}
-            </p>
 
             <p
-              className={`animate-fade-up delay-3 mt-6 text-lg md:text-xl text-ivory/90 max-w-lg ${locale === "am" ? "amharic" : ""}`}
+              className={`animate-fade-up delay-2 mt-6 text-base md:text-lg text-ivory/85 max-w-lg leading-relaxed ${locale === "am" ? "amharic" : ""}`}
             >
-              {bilingual(artist.tagline)}
+              {bilingual(artist.shortBio)}
             </p>
 
-            <div className="animate-fade-up delay-4 mt-10 flex flex-wrap gap-3">
-              <Button href="/music">{t.exploreMusic}</Button>
-              <Button href="/videos" variant="secondary">
-                {t.watchVideos}
+            <div className="animate-fade-up delay-3 mt-10 flex flex-wrap gap-3">
+              <Button href="/music">{t.listenNow}</Button>
+              <Button href="/events" variant="secondary">
+                {t.liveEvents}
               </Button>
-              <Button href="/about" variant="ghost">
-                {t.discoverStory}
+              <Button href="/shop" variant="ghost">
+                {t.shop}
               </Button>
             </div>
+
+            {streaming.length ? (
+              <p className="animate-fade-up delay-3 mt-8 text-xs uppercase tracking-[0.18em] text-muted">
+                {t.availableOn}
+                <span className="ml-3 inline-flex flex-wrap gap-x-4 gap-y-2 normal-case tracking-normal text-sm text-ivory/80">
+                  {streaming.map((link) => (
+                    <a
+                      key={link.id}
+                      href={link.url!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-brass transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </span>
+              </p>
+            ) : null}
           </div>
         </Container>
       </div>

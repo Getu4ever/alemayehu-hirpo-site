@@ -23,9 +23,12 @@ export default function MusicPage() {
       <PageHero
         eyebrow="Discography"
         title="Music"
+        titleAccent="Catalogue"
         titleAm="ሙዚቃ"
+        titleAccentAm="ካታሎግ"
         description="Albums, collaborations, and songs from Alemayehu Hirpo’s catalogue."
         descriptionAm="ከአለማየሁ ሂርጶ ካታሎግ የመጡ አልበሞች፣ ትብብሮች እና ዘፈኖች።"
+        image="/images/albums/evangadi.jpg"
       />
 
       {featured ? (
@@ -60,7 +63,11 @@ export default function MusicPage() {
                 </p>
                 {featured.tracks ? (
                   <div className="mb-6">
-                    <TrackList tracks={featured.tracks} />
+                    <TrackList
+                      tracks={featured.tracks}
+                      releaseTitle={featured.title}
+                      coverImage={featured.coverImage}
+                    />
                   </div>
                 ) : null}
                 <div className="flex flex-wrap gap-3">

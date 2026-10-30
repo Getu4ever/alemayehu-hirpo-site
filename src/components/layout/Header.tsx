@@ -10,8 +10,6 @@ import { useLanguage } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileNavigation } from "./MobileNavigation";
-import { FlagStripe } from "@/components/ui/FlagStripe";
-
 export function Header() {
   const pathname = usePathname();
   const { bilingual } = useLanguage();
@@ -48,7 +46,6 @@ export function Header() {
           : "bg-gradient-to-b from-charcoal/85 to-transparent",
       )}
     >
-      {(scrolled || open) && <FlagStripe />}
       <div className="mx-auto flex h-[var(--header-height)] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
         <Link
           href="/"

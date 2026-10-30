@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="vg" cx="30%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2a1020"/>
+      <stop offset="100%" stop-color="#060a08"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="500" fill="url(#vg)"/>
+  <!-- Film strip left -->
+  <g fill="#0c100e">
+    <rect x="0" y="40" width="140" height="420" fill="#121812"/>
+    <g fill="#060a08">
+      <rect x="18" y="60" width="28" height="22" rx="3"/>
+      <rect x="18" y="110" width="28" height="22" rx="3"/>
+      <rect x="18" y="160" width="28" height="22" rx="3"/>
+      <rect x="18" y="210" width="28" height="22" rx="3"/>
+      <rect x="18" y="260" width="28" height="22" rx="3"/>
+      <rect x="18" y="310" width="28" height="22" rx="3"/>
+      <rect x="18" y="360" width="28" height="22" rx="3"/>
+      <rect x="18" y="410" width="28" height="22" rx="3"/>
+      <rect x="94" y="60" width="28" height="22" rx="3"/>
+      <rect x="94" y="110" width="28" height="22" rx="3"/>
+      <rect x="94" y="160" width="28" height="22" rx="3"/>
+      <rect x="94" y="210" width="28" height="22" rx="3"/>
+      <rect x="94" y="260" width="28" height="22" rx="3"/>
+      <rect x="94" y="310" width="28" height="22" rx="3"/>
+      <rect x="94" y="360" width="28" height="22" rx="3"/>
+      <rect x="94" y="410" width="28" height="22" rx="3"/>
+    </g>
+  </g>
+  <!-- Screen frame -->
+  <rect x="420" y="90" width="760" height="320" rx="8" fill="#0a120c" stroke="#d4b40a" stroke-opacity="0.35" stroke-width="2"/>
+  <rect x="440" y="110" width="720" height="280" fill="#122018"/>
+  <!-- Play button -->
+  <circle cx="800" cy="250" r="48" fill="#d4b40a" fill-opacity="0.9"/>
+  <path d="M790 228 L790 272 L826 250 Z" fill="#0a120c"/>
+  <!-- Soft rays -->
+  <g stroke="#d4b40a" stroke-opacity="0.08" stroke-width="40">
+    <line x1="800" y1="250" x2="200" y2="80"/>
+    <line x1="800" y1="250" x2="200" y2="420"/>
+    <line x1="800" y1="250" x2="1400" y2="100"/>
+  </g>
+</svg>

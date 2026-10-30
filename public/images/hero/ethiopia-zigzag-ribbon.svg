@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" fill="none" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="grn" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0ab040"/>
+      <stop offset="100%" stop-color="#067a28"/>
+    </linearGradient>
+    <linearGradient id="ylw" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffe34a"/>
+      <stop offset="100%" stop-color="#e6c008"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e8242c"/>
+      <stop offset="100%" stop-color="#c10f16"/>
+    </linearGradient>
+    <linearGradient id="depth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="55%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.18"/>
+    </linearGradient>
+    <filter id="drop" x="-4%" y="-40%" width="108%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#drop)">
+    <!-- Slim zigzag: left fold ? long sweep. Band height ~14px each. -->
+    <path fill="url(#grn)" d="
+      M20 28
+      C70 8 130 10 180 28
+      C210 40 225 58 220 78
+      C215 92 195 102 170 104
+      C205 106 245 88 280 62
+      C330 22 410 12 520 16
+      C720 24 960 42 1180 34
+      C1280 28 1360 24 1460 30
+      L1460 44
+      C1360 38 1280 42 1180 48
+      C960 56 720 38 520 30
+      C410 26 345 36 300 70
+      C270 96 220 112 170 104
+      C145 100 125 88 120 72
+      C118 58 130 42 155 32
+      C160 22 140 12 100 12
+      C65 12 35 20 20 28
+      Z"/>
+    <path fill="url(#ylw)" d="
+      M120 72
+      C125 88 145 100 170 104
+      C220 112 270 96 300 70
+      C345 36 410 26 520 30
+      C720 38 960 56 1180 48
+      C1280 42 1360 38 1460 44
+      L1460 58
+      C1360 52 1280 56 1180 62
+      C960 70 720 52 520 44
+      C410 40 350 50 310 82
+      C280 108 230 120 175 114
+      C145 110 122 96 115 80
+      C116 76 118 74 120 72
+      Z"/>
+    <path fill="url(#red)" d="
+      M115 80
+      C122 96 145 110 175 114
+      C230 120 280 108 310 82
+      C350 50 410 40 520 44
+      C720 52 960 70 1180 62
+      C1280 56 1360 52 1460 58
+      L1460 72
+      C1360 66 1280 70 1180 76
+      C960 84 720 66 520 58
+      C410 54 355 68 320 98
+      C290 124 230 136 165 126
+      C130 120 100 100 95 82
+      C105 82 110 81 115 80
+      Z"/>
+    <path fill="url(#depth)" d="
+      M175 104
+      C230 110 285 90 320 62
+      C365 28 440 16 540 20
+      C740 28 980 46 1200 38
+      C1300 32 1380 28 1460 34
+      L1460 72
+      C1380 66 1300 70 1200 76
+      C980 84 740 66 540 58
+      C440 54 380 68 340 100
+      C305 126 240 134 180 120
+      Z"/>
+  </g>
+</svg>

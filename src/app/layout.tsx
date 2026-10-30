@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Outfit, Noto_Sans_Ethiopic } from "next/font/google";
+import { Playfair_Display, Inter, Noto_Sans_Ethiopic } from "next/font/google";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { artist } from "@/data/artist";
 import "./globals.css";
 
-const display = Cormorant_Garamond({
+const display = Playfair_Display({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
-const body = Outfit({
+const body = Inter({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -33,6 +33,10 @@ export const metadata: Metadata = {
     template: `%s | ${artist.name.en}`,
   },
   description: artist.shortBio.en,
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg",
+  },
   openGraph: {
     title: `${artist.name.en} | ${artist.name.am}`,
     description: artist.shortBio.en,

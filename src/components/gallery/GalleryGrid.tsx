@@ -11,20 +11,34 @@ import { useLanguage } from "@/i18n/LanguageProvider";
 import { ImageLightbox } from "./ImageLightbox";
 import { cn } from "@/lib/utils";
 
-export function GalleryGrid() {
+export function GalleryGrid({
+  fanItems = [],
+}: {
+  fanItems?: GalleryItem[];
+}) {
   const { bilingual } = useLanguage();
   const [filter, setFilter] = useState<string>("all");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+  const allItems = useMemo(
+    () => [...fanItems, ...galleryItems],
+    [fanItems],
+  );
+
   const filtered = useMemo(() => {
-    if (filter === "all") return galleryItems;
-    return galleryItems.filter((item) => item.category === filter);
-  }, [filter]);
+    if (filter === "all") return allItems;
+    return allItems.filter((item) => item.category === filter);
+  }, [allItems, filter]);
+
+  const visibleCategories = useMemo(() => {
+    if (fanItems.length) return galleryCategories;
+    return galleryCategories.filter((cat) => cat.id !== "fans");
+  }, [fanItems.length]);
 
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-10" role="tablist">
-        {galleryCategories.map((cat) => (
+        {visibleCategories.map((cat) => (
           <button
             key={cat.id}
             type="button"
@@ -60,6 +74,11 @@ export function GalleryGrid() {
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
             />
+            {item.category === "fans" ? (
+              <span className="absolute left-2 top-2 bg-black/65 px-2 py-1 text-[0.6rem] uppercase tracking-[0.16em] text-brass">
+                Fan
+              </span>
+            ) : null}
           </button>
         ))}
       </div>

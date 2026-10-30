@@ -19,13 +19,13 @@ export function EventsPreview() {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <SectionHeading
             eyebrow={t.livePerformances}
-            title={t.recentEvents}
-            titleAm="የቅርብ ጊዜ ዝግጅቶች"
+            title={t.liveEvents}
+            titleAm="ቀጥታ ዝግጅቶች"
             className="mb-0"
           />
           <Link
             href="/events"
-            className="text-sm text-gold hover:text-gold-soft mb-10 md:mb-14"
+            className="text-sm text-brass hover:text-gold-soft mb-10 md:mb-14 shrink-0"
           >
             {t.viewAllEvents} →
           </Link>

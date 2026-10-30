@@ -1,37 +1,26 @@
 "use client";
 
-import Link from "next/link";
-import { releases } from "@/data/releases";
+import { getFeaturedRelease } from "@/data/releases";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { AlbumCard } from "@/components/music/AlbumCard";
+import { FeaturedAlbumPlayer } from "@/components/music/FeaturedAlbumPlayer";
 
 export function LatestMusic() {
+  const release = getFeaturedRelease();
   const { t } = useLanguage();
 
+  if (!release) return null;
+
   return (
-    <section className="section-pad">
+    <section className="section-pad relative">
       <Container>
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-2">
-          <SectionHeading
-            eyebrow={t.latestMusic}
-            title={t.allReleases}
-            titleAm="ሁሉም ሥራዎች"
-            className="mb-0"
-          />
-          <Link
-            href="/music"
-            className="text-sm text-gold hover:text-gold-soft transition-colors shrink-0 mb-10 md:mb-14"
-          >
-            {t.exploreMusic} →
-          </Link>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {releases.map((release) => (
-            <AlbumCard key={release.id} release={release} />
-          ))}
-        </div>
+        <SectionHeading
+          eyebrow={t.featured}
+          title={t.latestMusic}
+          titleAm="አዲስ ሙዚቃ"
+        />
+        <FeaturedAlbumPlayer release={release} />
       </Container>
     </section>
   );

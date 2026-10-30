@@ -8,7 +8,8 @@ export type GalleryItem = {
     | "studio"
     | "promo"
     | "behind-the-scenes"
-    | "archival";
+    | "archival"
+    | "fans";
   width: number;
   height: number;
   placeholder?: boolean;
@@ -113,4 +114,5 @@ export const galleryCategories = [
   { id: "concert", label: { en: "Concert", am: "ኮንሰርት" } },
   { id: "behind-the-scenes", label: { en: "Behind the Scenes", am: "ከትዕይንት በስተጀርባ" } },
   { id: "archival", label: { en: "Archival", am: "መዝገብ" } },
+  { id: "fans", label: { en: "From Fans", am: "ከደጋፊዎች" } },
 ] as const;
