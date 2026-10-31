@@ -1,6 +1,5 @@
-import { promises as fs } from "fs";
-import path from "path";
 import { randomUUID } from "crypto";
+import { put, list, del } from "@vercel/blob";
 import type { GalleryItem } from "@/data/gallery";
 
 export type FanSubmissionStatus = "pending" | "approved" | "rejected";
@@ -15,20 +14,18 @@ export type FanSubmission = {
   mimeType: string;
   createdAt: string;
   reviewedAt?: string;
-  /** Relative path under data/fan-submissions/files when pending */
-  pendingFile?: string;
+  /** Blob pathname for pending image */
+  pendingPath?: string;
+  /** Public URL for pending image (admin preview) */
+  pendingUrl?: string;
   /** Public URL once approved */
   publicSrc?: string;
   width?: number;
   height?: number;
 };
 
-const ROOT = process.cwd();
-const SUBMISSIONS_DIR = path.join(ROOT, "data", "fan-submissions");
-const FILES_DIR = path.join(SUBMISSIONS_DIR, "files");
-const INDEX_PATH = path.join(SUBMISSIONS_DIR, "index.json");
-const APPROVED_JSON = path.join(ROOT, "src", "data", "fan-gallery.json");
-const PUBLIC_FANS_DIR = path.join(ROOT, "public", "images", "gallery", "fans");
+const INDEX_PATH = "fan-gallery/index.json";
+const APPROVED_PATH = "fan-gallery/approved.json";
 
 const ALLOWED_TYPES = new Set([
   "image/jpeg",
@@ -38,51 +35,70 @@ const ALLOWED_TYPES = new Set([
 ]);
 const MAX_BYTES = 6 * 1024 * 1024;
 
-async function ensureDirs() {
-  await fs.mkdir(FILES_DIR, { recursive: true });
-  await fs.mkdir(PUBLIC_FANS_DIR, { recursive: true });
-  try {
-    await fs.access(INDEX_PATH);
-  } catch {
-    await fs.writeFile(INDEX_PATH, "[]", "utf8");
+function blobConfigured() {
+  return Boolean(
+    process.env.BLOB_READ_WRITE_TOKEN?.trim() ||
+      process.env.BLOB_STORE_ID?.trim(),
+  );
+}
+
+function assertBlobConfigured() {
+  if (!blobConfigured()) {
+    throw new Error(
+      "Blob storage is not configured. Add a Vercel Blob store (BLOB_READ_WRITE_TOKEN) to enable fan gallery submissions.",
+    );
   }
+}
+
+async function readJsonBlob<T>(pathname: string, fallback: T): Promise<T> {
+  assertBlobConfigured();
+  const { blobs } = await list({ prefix: pathname, limit: 1 });
+  const match = blobs.find((b) => b.pathname === pathname);
+  if (!match) return fallback;
+  const res = await fetch(match.url, { cache: "no-store" });
+  if (!res.ok) return fallback;
   try {
-    await fs.access(APPROVED_JSON);
+    return (await res.json()) as T;
   } catch {
-    await fs.writeFile(APPROVED_JSON, "[]", "utf8");
+    return fallback;
   }
+}
+
+async function writeJsonBlob(pathname: string, data: unknown) {
+  assertBlobConfigured();
+  await put(pathname, JSON.stringify(data, null, 2), {
+    access: "public",
+    contentType: "application/json",
+    addRandomSuffix: false,
+    allowOverwrite: true,
+  });
 }
 
 async function readIndex(): Promise<FanSubmission[]> {
-  await ensureDirs();
-  const raw = await fs.readFile(INDEX_PATH, "utf8");
-  try {
-    return JSON.parse(raw) as FanSubmission[];
-  } catch {
-    return [];
-  }
+  return readJsonBlob<FanSubmission[]>(INDEX_PATH, []);
 }
 
 async function writeIndex(items: FanSubmission[]) {
-  await ensureDirs();
-  await fs.writeFile(INDEX_PATH, JSON.stringify(items, null, 2), "utf8");
+  await writeJsonBlob(INDEX_PATH, items);
 }
 
 export async function readApprovedFanGallery(): Promise<GalleryItem[]> {
+  if (!blobConfigured()) return [];
   try {
-    const raw = await fs.readFile(APPROVED_JSON, "utf8");
-    return JSON.parse(raw) as GalleryItem[];
+    return await readJsonBlob<GalleryItem[]>(APPROVED_PATH, []);
   } catch {
     return [];
   }
 }
 
 async function writeApprovedFanGallery(items: GalleryItem[]) {
-  await fs.writeFile(APPROVED_JSON, JSON.stringify(items, null, 2), "utf8");
+  await writeJsonBlob(APPROVED_PATH, items);
 }
 
 function extensionFor(mime: string, originalName: string) {
-  const fromName = path.extname(originalName).toLowerCase();
+  const fromName = originalName.includes(".")
+    ? `.${originalName.split(".").pop()!.toLowerCase()}`
+    : "";
   if (fromName && [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(fromName)) {
     return fromName === ".jpeg" ? ".jpg" : fromName;
   }
@@ -110,13 +126,16 @@ export async function createFanSubmission(input: {
 }): Promise<FanSubmission> {
   const error = validateFanUpload(input.file);
   if (error) throw new Error(error);
+  assertBlobConfigured();
 
-  await ensureDirs();
   const id = randomUUID();
   const ext = extensionFor(input.file.type, input.file.name);
-  const pendingFile = `${id}${ext}`;
-  const buffer = Buffer.from(await input.file.arrayBuffer());
-  await fs.writeFile(path.join(FILES_DIR, pendingFile), buffer);
+  const pendingPath = `fan-gallery/pending/${id}${ext}`;
+  const blob = await put(pendingPath, input.file, {
+    access: "public",
+    contentType: input.file.type,
+    addRandomSuffix: false,
+  });
 
   const submission: FanSubmission = {
     id,
@@ -127,7 +146,8 @@ export async function createFanSubmission(input: {
     originalName: input.file.name,
     mimeType: input.file.type,
     createdAt: new Date().toISOString(),
-    pendingFile,
+    pendingPath,
+    pendingUrl: blob.url,
     width: 1200,
     height: 1600,
   };
@@ -149,35 +169,55 @@ export async function getFanSubmission(id: string) {
   return items.find((item) => item.id === id) ?? null;
 }
 
-export async function getPendingFilePath(submission: FanSubmission) {
-  if (!submission.pendingFile) return null;
-  return path.join(FILES_DIR, submission.pendingFile);
-}
-
 export async function approveFanSubmission(id: string) {
   const items = await readIndex();
   const submission = items.find((item) => item.id === id);
   if (!submission) throw new Error("Submission not found.");
   if (submission.status === "approved") return submission;
-  if (!submission.pendingFile) throw new Error("Missing image file.");
 
-  await ensureDirs();
-  const ext = path.extname(submission.pendingFile);
-  const publicName = `${submission.id}${ext}`;
-  const from = path.join(FILES_DIR, submission.pendingFile);
-  const to = path.join(PUBLIC_FANS_DIR, publicName);
-  await fs.copyFile(from, to);
+  const sourceUrl = submission.pendingUrl;
+  if (!sourceUrl && !submission.pendingPath) {
+    throw new Error("Missing image file.");
+  }
 
-  const publicSrc = `/images/gallery/fans/${publicName}`;
+  assertBlobConfigured();
+  const ext = extensionFor(
+    submission.mimeType,
+    submission.pendingPath || submission.originalName,
+  );
+  const approvedPath = `fan-gallery/approved/${submission.id}${ext}`;
+
+  let publicSrc = submission.pendingUrl;
+  if (sourceUrl) {
+    const imageRes = await fetch(sourceUrl);
+    if (!imageRes.ok) throw new Error("Unable to read pending image.");
+    const buffer = Buffer.from(await imageRes.arrayBuffer());
+    const blob = await put(approvedPath, buffer, {
+      access: "public",
+      contentType: submission.mimeType || "image/jpeg",
+      addRandomSuffix: false,
+      allowOverwrite: true,
+    });
+    publicSrc = blob.url;
+  }
+
   submission.status = "approved";
   submission.reviewedAt = new Date().toISOString();
   submission.publicSrc = publicSrc;
   await writeIndex(items);
 
+  if (submission.pendingPath) {
+    try {
+      await del(submission.pendingPath);
+    } catch {
+      // Pending blob may already be gone
+    }
+  }
+
   const approved = await readApprovedFanGallery();
   const galleryItem: GalleryItem = {
     id: `fan-${submission.id}`,
-    src: publicSrc,
+    src: publicSrc!,
     alt: {
       en: submission.caption
         ? `${submission.caption} — shared by ${submission.name}`

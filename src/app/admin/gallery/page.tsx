@@ -144,6 +144,7 @@ export default function AdminGalleryPage() {
                 <img
                   src={
                     item.publicSrc ||
+                    item.pendingUrl ||
                     `/api/gallery/admin/preview/${item.id}?secret=${encodeURIComponent(secret)}`
                   }
                   alt=""
