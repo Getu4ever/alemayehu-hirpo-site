@@ -101,8 +101,8 @@ export function Footer() {
       )}
     >
       <Container className="py-14 md:py-16">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(4,minmax(0,1fr))]">
-          <div className="sm:col-span-2 lg:col-span-1 max-w-sm">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-[1.4fr_repeat(4,minmax(0,1fr))] lg:gap-10">
+          <div className="col-span-2 max-w-sm lg:col-span-1">
             <div>
               <p className="font-display text-lg tracking-[0.06em] text-brass">
                 ALEMAYEHU HIRPO
