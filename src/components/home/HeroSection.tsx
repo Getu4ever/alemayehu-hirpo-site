@@ -34,8 +34,18 @@ export function HeroSection() {
           }}
           aria-hidden
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#021208]/92 via-[#021208]/45 to-transparent lg:via-[#021208]/25 lg:to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#021208]/8 via-[#021208]/3 to-transparent" />
+        {/* Desktop: soft left wash. Mobile: heavier cover so copy clears the jacket. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#021208]/95 via-[#021208]/55 to-transparent max-md:via-[#021208]/80 max-md:to-[#021208]/35 lg:via-[#021208]/25 lg:to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-[#021208] via-[#021208]/55 to-transparent md:h-2/5 md:via-[#021208]/3" />
+        {/* Extra mobile scrim over the portrait mid-zone */}
+        <div
+          className="absolute inset-0 md:hidden pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(2,18,8,0.35) 0%, rgba(2,18,8,0.55) 42%, rgba(2,18,8,0.88) 100%)",
+          }}
+          aria-hidden
+        />
       </div>
 
       {/* Adwa seal — sits right of copy, left of portrait */}
@@ -82,17 +92,26 @@ export function HeroSection() {
           <img
             src="/images/hero/alemayehu03-hero.png"
             alt={`${artist.name.en} — ${artist.name.am}`}
-            className="h-[78vh] sm:h-[88vh] lg:h-[100vh] xl:h-[105vh] w-auto max-w-[95%] sm:max-w-none object-contain object-bottom drop-shadow-[0_30px_70px_rgba(0,0,0,0.55)] translate-x-2 sm:translate-x-4 lg:translate-x-6 xl:translate-x-8"
+            className="h-[72vh] sm:h-[88vh] lg:h-[100vh] xl:h-[105vh] w-auto max-w-[92%] sm:max-w-none object-contain object-bottom drop-shadow-[0_30px_70px_rgba(0,0,0,0.55)] translate-x-6 opacity-90 sm:translate-x-4 sm:opacity-100 lg:translate-x-6 xl:translate-x-8"
           />
         </div>
 
         <Container className="relative z-20 pb-16 pt-36 md:pb-24 md:pt-44 w-full">
-          <div className="max-w-lg lg:max-w-xl">
-            <p className="animate-fade-up mb-5 text-xs uppercase tracking-[0.22em] text-brass">
+          <div className="relative max-w-lg lg:max-w-xl">
+            {/* Soft local backdrop so mobile type stays readable over the suit */}
+            <div
+              className="pointer-events-none absolute -inset-x-5 -top-8 -bottom-6 -z-10 rounded-sm md:hidden"
+              style={{
+                background:
+                  "radial-gradient(ellipse 90% 80% at 30% 45%, rgba(2,18,8,0.82), rgba(2,18,8,0.45) 55%, transparent 75%)",
+              }}
+              aria-hidden
+            />
+            <p className="animate-fade-up mb-5 text-xs uppercase tracking-[0.22em] text-brass [text-shadow:0_1px_12px_rgba(2,18,8,0.9)]">
               {t.heroEyebrow}
             </p>
 
-            <h1 className="animate-fade-up delay-1 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ivory leading-[1.05] font-bold">
+            <h1 className="animate-fade-up delay-1 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ivory leading-[1.05] font-bold [text-shadow:0_2px_28px_rgba(2,18,8,0.95),0_1px_3px_rgba(0,0,0,0.75)]">
               {locale === "am" ? (
                 <span className="amharic" lang="am">
                   {artist.tagline.am}
@@ -101,13 +120,16 @@ export function HeroSection() {
                 <>
                   The Sound of
                   <br />
-                  <span className="text-brass">Ethiopian</span> Soul
+                  <span className="text-brass [text-shadow:0_2px_24px_rgba(2,18,8,0.9)]">
+                    Ethiopian
+                  </span>{" "}
+                  Soul
                 </>
               )}
             </h1>
 
             <p
-              className={`animate-fade-up delay-2 mt-6 text-base md:text-lg text-ivory/85 max-w-lg leading-relaxed ${locale === "am" ? "amharic" : ""}`}
+              className={`animate-fade-up delay-2 mt-6 text-base md:text-lg text-ivory/90 max-w-lg leading-relaxed [text-shadow:0_2px_20px_rgba(2,18,8,0.95),0_1px_2px_rgba(0,0,0,0.8)] ${locale === "am" ? "amharic" : ""}`}
             >
               {bilingual(artist.shortBio)}
             </p>

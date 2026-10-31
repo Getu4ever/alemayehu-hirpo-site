@@ -25,7 +25,7 @@ export const merchItems: MerchItem[] = [
     },
     price: 34.99,
     category: "apparel",
-    image: "/images/merch/tee-evangadi-baytewar.svg",
+    image: "/images/merch/tee-evangadi-baytewar.png",
     featured: true,
   },
   {
@@ -41,7 +41,7 @@ export const merchItems: MerchItem[] = [
     },
     price: 32.99,
     category: "apparel",
-    image: "/images/merch/tee-baytewar.svg",
+    image: "/images/merch/tee-baytewar.png",
     featured: true,
   },
   {
@@ -57,7 +57,7 @@ export const merchItems: MerchItem[] = [
     },
     price: 28.99,
     category: "accessories",
-    image: "/images/merch/cap-baytewar.svg",
+    image: "/images/merch/cap-baytewar.png",
     featured: true,
   },
   {
@@ -73,7 +73,7 @@ export const merchItems: MerchItem[] = [
     },
     price: 64.99,
     category: "apparel",
-    image: "/images/merch/hoodie-evangadi.svg",
+    image: "/images/merch/hoodie-evangadi.png",
     featured: true,
   },
   {
@@ -89,7 +89,7 @@ export const merchItems: MerchItem[] = [
     },
     price: 24.99,
     category: "accessories",
-    image: "/images/merch/tote-yasebshale.svg",
+    image: "/images/merch/tote-yasebshale.png",
   },
   {
     id: "vinyl-evangadi",
@@ -104,7 +104,7 @@ export const merchItems: MerchItem[] = [
     },
     price: 44.99,
     category: "music",
-    image: "/images/merch/vinyl-evangadi.svg",
+    image: "/images/merch/vinyl-evangadi.png",
   },
 ];
 

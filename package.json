@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate:merch-prints": "node scripts/generate-merch-prints.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
 import { LatestMusic } from "@/components/home/LatestMusic";
 import { ArtistIntroduction } from "@/components/home/ArtistIntroduction";
@@ -20,7 +21,9 @@ export default function HomePage() {
       <LatestMusic />
       <ArtistIntroduction />
       <EventsPreview />
-      <MerchPreview />
+      <Suspense fallback={null}>
+        <MerchPreview />
+      </Suspense>
       <NewsletterSection />
     </>
   );

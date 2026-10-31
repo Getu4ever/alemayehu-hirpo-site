@@ -1,9 +1,8 @@
 import { createPageMetadata } from "@/lib/metadata";
 import { artist } from "@/data/artist";
-import { merchItems } from "@/data/merch";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container } from "@/components/ui/Container";
-import { MerchCard } from "@/components/shop/MerchCard";
+import { ShopProductGrid } from "@/components/shop/ShopProductGrid";
 
 export const metadata = createPageMetadata({
   title: "Shop",
@@ -26,15 +25,7 @@ export default function ShopPage() {
       />
       <section className="section-pad pt-0">
         <Container>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {merchItems.map((item) => (
-              <MerchCard key={item.id} item={item} />
-            ))}
-          </div>
-          <p className="mt-12 text-center text-sm text-muted max-w-lg mx-auto">
-            Checkout is coming soon. For bulk or press inquiries, use the contact
-            page.
-          </p>
+          <ShopProductGrid />
         </Container>
       </section>
     </>

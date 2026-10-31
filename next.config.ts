@@ -11,6 +11,16 @@ const nextConfig: NextConfig = {
         hostname: "i.ytimg.com",
         pathname: "/vi/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.printify.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images-api.printify.com",
+        pathname: "/**",
+      },
     ],
   },
   turbopack: {
