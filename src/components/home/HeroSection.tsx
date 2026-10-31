@@ -39,26 +39,26 @@ export function HeroSection() {
         <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-[#021208] via-[#021208]/55 to-transparent max-md:h-[48%] max-md:via-[#021208]/7 md:h-2/5 md:via-[#021208]/3" />
       </div>
 
-      {/* Adwa seal — sits right of copy, left of portrait */}
+      {/* Adwa seal — mobile: left of portrait in empty space; desktop: between copy and portrait */}
       <div
-        className="pointer-events-none absolute left-[62%] top-[26%] z-[5] hidden w-[11rem] -translate-x-1/2 select-none md:block lg:left-[60%] lg:top-[24%] lg:w-[12.5rem] xl:left-[58%] xl:w-[13.5rem]"
+        className="pointer-events-none absolute z-[5] select-none left-4 top-[7.5rem] w-[7.25rem] max-md:block md:left-[62%] md:top-[26%] md:w-[11rem] md:-translate-x-1/2 lg:left-[60%] lg:top-[24%] lg:w-[12.5rem] xl:left-[58%] xl:w-[13.5rem]"
         aria-hidden
       >
-        <div className="relative opacity-[0.55] lg:opacity-[0.62]">
+        <div className="relative opacity-[0.7] md:opacity-[0.55] lg:opacity-[0.62]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/hero/adwa-shields.svg"
             alt=""
             className="mx-auto w-full"
           />
-          <div className="-mt-2 text-center">
-            <p className="amharic text-xl leading-none tracking-wide text-brass lg:text-[1.55rem]">
+          <div className="-mt-1 text-center md:-mt-2">
+            <p className="amharic text-base leading-none tracking-wide text-brass md:text-xl lg:text-[1.55rem]">
               አድዋ
             </p>
-            <p className="mt-1 font-display text-[0.65rem] font-semibold tracking-[0.36em] text-brass/75">
+            <p className="mt-0.5 font-display text-[0.55rem] font-semibold tracking-[0.32em] text-brass/75 md:mt-1 md:text-[0.65rem] md:tracking-[0.36em]">
               ADWA
             </p>
-            <p className="mt-0.5 text-[0.5rem] uppercase tracking-[0.28em] text-ivory/40">
+            <p className="mt-0.5 hidden text-[0.5rem] uppercase tracking-[0.28em] text-ivory/40 md:block">
               The African Victory · 1896
             </p>
           </div>
