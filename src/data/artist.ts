@@ -62,8 +62,8 @@ export const artist = {
     },
   },
   images: {
-    // High-res cutout from alemayehu03 for homepage hero
-    hero: "/images/hero/alemayehu03-hero.png",
+    // Cutout from alemayehu01 for homepage hero
+    hero: "/images/hero/alemayehu01-hero.png",
     portrait: "/images/artist/alemayehu01.jpeg",
     about: "/images/artist/alemayehu02.jpeg",
     og: "/images/artist/alemayehu05.jpeg",

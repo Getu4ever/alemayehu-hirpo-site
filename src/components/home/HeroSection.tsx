@@ -82,9 +82,9 @@ export function HeroSection() {
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 flex w-full items-start justify-end max-md:top-[4.25rem] max-md:bottom-auto sm:w-[75%] sm:items-end lg:w-[62%] xl:w-[58%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/hero/alemayehu03-hero.png"
+            src="/images/hero/alemayehu01-hero.png"
             alt={`${artist.name.en} — ${artist.name.am}`}
-            className="h-[52vh] w-auto max-w-[78%] translate-x-10 object-contain object-top drop-shadow-[0_30px_70px_rgba(0,0,0,0.55)] sm:h-[88vh] sm:max-w-none sm:translate-x-4 sm:object-bottom lg:h-[100vh] lg:translate-x-6 xl:h-[105vh] xl:translate-x-8"
+            className="h-[52vh] w-auto max-w-[78%] translate-x-16 object-contain object-top drop-shadow-[0_30px_70px_rgba(0,0,0,0.55)] sm:h-[88vh] sm:max-w-none sm:translate-x-10 sm:object-bottom lg:h-[100vh] lg:translate-x-36 xl:h-[105vh] xl:translate-x-44"
           />
         </div>
 
