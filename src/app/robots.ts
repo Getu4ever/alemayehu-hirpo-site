@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://www.alemayehu-hirpo.com/sitemap.xml",
+    sitemap: "https://alemayehuhirpo.com/sitemap.xml",
   };
 }

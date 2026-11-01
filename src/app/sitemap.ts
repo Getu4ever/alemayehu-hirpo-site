@@ -5,7 +5,7 @@ import { getAllNewsArticles } from "@/lib/news-store";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   await connection();
-  const base = "https://www.alemayehu-hirpo.com";
+  const base = "https://alemayehuhirpo.com";
   const staticRoutes = [
     "",
     "/about",

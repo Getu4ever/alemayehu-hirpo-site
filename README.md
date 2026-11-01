@@ -77,7 +77,7 @@ Forms validate on the client and show integration-ready success messaging. Befor
 - Per-page metadata via `createPageMetadata`
 - Open Graph / Twitter cards using artist photography
 - `src/app/sitemap.ts` and `src/app/robots.ts`
-- Update `metadataBase` in `src/app/layout.tsx` and sitemap/robots URLs when the production domain is confirmed (currently `https://www.alemayehu-hirpo.com` as a placeholder)
+- Production domain is set to `https://alemayehuhirpo.com` in `metadataBase`, sitemap, and robots — connect that domain in Vercel when DNS is ready
 
 ## Deployment
 

@@ -27,7 +27,7 @@ const inputClass =
 function contactInbox() {
   return (
     process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() ||
-    "bookings@alemayehu-hirpo.com"
+    "bookings@alemayehuhirpo.com"
   );
 }
 

@@ -26,8 +26,7 @@ const ethiopic = Noto_Sans_Ethiopic({
 });
 
 export const metadata: Metadata = {
-  // Update when the production domain is confirmed.
-  metadataBase: new URL("https://www.alemayehu-hirpo.com"),
+  metadataBase: new URL("https://alemayehuhirpo.com"),
   title: {
     default: `${artist.name.en} | ${artist.name.am}`,
     template: `%s | ${artist.name.en}`,
