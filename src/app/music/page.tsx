@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { createPageMetadata } from "@/lib/metadata";
 import { getFeaturedRelease } from "@/data/releases";
@@ -6,7 +5,7 @@ import { artist } from "@/data/artist";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container } from "@/components/ui/Container";
 import { ReleaseGrid } from "@/components/music/ReleaseGrid";
-import { TrackList } from "@/components/music/TrackList";
+import { FeaturedReleaseBlock } from "@/components/music/FeaturedReleaseBlock";
 import { MusicPageClient } from "./MusicPageClient";
 
 export const metadata = createPageMetadata({
@@ -34,89 +33,7 @@ export default function MusicPage() {
       {featured ? (
         <section className="pb-16 md:pb-24">
           <Container>
-            <div
-              id={featured.id}
-              className="grid gap-10 lg:grid-cols-[320px_1fr] border border-border p-6 md:p-10 bg-surface/50"
-            >
-              <div className="relative aspect-square overflow-hidden bg-forest/20">
-                <Image
-                  src={featured.coverImage}
-                  alt={`${featured.title.en} artwork`}
-                  fill
-                  sizes="320px"
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-[0.22em] text-gold mb-3">
-                  Featured · {featured.type}
-                  {featured.year ? ` · ${featured.year}` : ""}
-                </p>
-                <h2 className="font-display text-4xl text-ivory mb-2">
-                  {featured.title.en}
-                </h2>
-                {featured.title.am ? (
-                  <p className="amharic text-gold mb-4">{featured.title.am}</p>
-                ) : null}
-                <p className="text-xs uppercase tracking-[0.22em] text-brass mb-2">
-                  The story · ታሪኩ
-                </p>
-                <p className="text-muted leading-relaxed mb-4 max-w-2xl">
-                  {featured.description.en}
-                </p>
-                {featured.description.am ? (
-                  <p className="amharic text-muted/90 leading-relaxed mb-6 max-w-2xl">
-                    {featured.description.am}
-                  </p>
-                ) : null}
-
-                <p className="text-xs uppercase tracking-[0.22em] text-brass mb-3">
-                  Listen · ያዳምጡ
-                </p>
-                <div className="flex flex-wrap gap-3 mb-8">
-                  {featured.streaming.appleMusic ? (
-                    <a
-                      href={featured.streaming.appleMusic}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-3 text-sm uppercase tracking-wide bg-brass text-charcoal hover:brightness-110 min-h-11"
-                    >
-                      Apple Music <ExternalLink size={14} />
-                    </a>
-                  ) : null}
-                  {featured.streaming.soundcloud ? (
-                    <a
-                      href={featured.streaming.soundcloud}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-3 text-sm uppercase tracking-wide border border-gold/50 text-ivory hover:border-gold hover:bg-gold/10 min-h-11"
-                    >
-                      SoundCloud <ExternalLink size={14} />
-                    </a>
-                  ) : null}
-                  {featured.streaming.youtube ? (
-                    <a
-                      href={featured.streaming.youtube}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-3 text-sm uppercase tracking-wide border border-border text-muted hover:text-ivory hover:border-brass/40 min-h-11"
-                    >
-                      YouTube <ExternalLink size={14} />
-                    </a>
-                  ) : null}
-                </div>
-
-                {featured.tracks ? (
-                  <div className="mb-2">
-                    <TrackList
-                      tracks={featured.tracks}
-                      releaseTitle={featured.title}
-                      coverImage={featured.coverImage}
-                    />
-                  </div>
-                ) : null}
-              </div>
-            </div>
+            <FeaturedReleaseBlock release={featured} />
           </Container>
         </section>
       ) : null}
