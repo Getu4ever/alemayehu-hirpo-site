@@ -27,12 +27,20 @@ export default function EventsPage() {
       <section className="section-pad pt-0">
         <Container>
           <EventsPageContent />
-          <div className="mt-16 border border-border p-8 md:p-10 text-center bg-surface/40">
+          <div className="reveal-up mt-16 border border-brass/20 bg-surface/40 p-8 md:p-10 text-center">
+            <div className="flag-stripe mx-auto mb-6 max-w-[5.5rem]" aria-hidden>
+              <span />
+              <span />
+              <span />
+            </div>
             <h2 className="font-display text-3xl text-ivory mb-3">
               Booking inquiries
             </h2>
-            <p className="text-muted max-w-xl mx-auto mb-6">
+            <p className="text-muted max-w-xl mx-auto mb-2">
               For concert bookings and event appearances, use the contact form.
+            </p>
+            <p className="amharic text-muted/80 text-sm max-w-xl mx-auto mb-6">
+              ለኮንሰርት ቦታ ማስያዝና ዝግጅቶች የእውቂያ ቅጹን ይጠቀሙ።
             </p>
             <Link
               href="/contact"

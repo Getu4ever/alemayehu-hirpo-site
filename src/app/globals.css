@@ -327,11 +327,64 @@ body {
   animation: page-enter 0.6s var(--ease-out) both;
 }
 
+/* Signature motion — Adwa gasha settles gently */
+@keyframes gasha-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-gasha-float {
+  animation: gasha-float 5.5s var(--ease-out) infinite;
+}
+
+/* Soft section entrance */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-up {
+  animation: reveal-up 0.85s var(--ease-out) both;
+}
+
+/* Merch / card lift */
+.lift-hover {
+  transition:
+    transform 0.45s var(--ease-out),
+    border-color 0.35s var(--ease-out),
+    box-shadow 0.45s var(--ease-out);
+}
+
+.lift-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-up-delay,
-  .page-enter {
+  .page-enter,
+  .animate-gasha-float,
+  .reveal-up {
     animation: none !important;
+  }
+
+  .lift-hover,
+  .lift-hover:hover {
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
   }
 }
 

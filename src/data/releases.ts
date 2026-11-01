@@ -37,8 +37,8 @@ export const releases: Release[] = [
     releaseDate: "2004-05-01",
     coverImage: "/images/albums/evangadi.jpg",
     description: {
-      en: "Collaborative album with Gossaye Tesfaye. Listed on Apple Music as a 13-song release originally dated May 1, 2004. Among Alemayehu Hirpo’s most widely recognized catalogue entries.",
-      am: "ከጎሳዬ ተስፋዬ ጋር የተሰራ አልበም። በአፕል ሙዚክ ላይ 13 ዘፈኖች ያሉት ሆኖ በግንቦት 1፣ 2004 ተብሎ ተመዝግቧል።",
+      en: "A cornerstone of Alemayehu Hirpo’s catalogue — the collaborative album with Gossaye Tesfaye that carried Amharic soul into living rooms across Ethiopia and the diaspora. Thirteen songs of longing, celebration, and unmistakable voice. Start with Bayetware, then let the record unfold.",
+      am: "የአለማየሁ ሂርጶ ካታሎግ ዋና ምሰሶ — ከጎሳዬ ተስፋዬ ጋር የተሰራው አልበም አማርኛ ነፍስን ወደ ኢትዮጵያና ስደተኛ መኖሪያ ቤቶች አደረሰ። አሥራ ሦስት የናፍቆት፣ የበዓል እና የማይረሳ ድምጽ ዘፈኖች። በባይተዋር ጀምረው አልበሙን ይከተሉ።",
     },
     artists: ["Gossaye Tesfaye", "Alemayehu Hirpo"],
     tracks: [

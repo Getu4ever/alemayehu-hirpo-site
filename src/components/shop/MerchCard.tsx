@@ -16,7 +16,10 @@ export function MerchCard({ product }: { product: ShopProduct }) {
       : product.description;
 
   return (
-    <article id={product.id} className="group flex flex-col scroll-mt-28">
+    <article
+      id={product.id}
+      className="group lift-hover flex flex-col scroll-mt-28"
+    >
       <Link
         href={href}
         className="relative aspect-square overflow-hidden bg-surface border border-border/50 transition-colors group-hover:border-brass/40"

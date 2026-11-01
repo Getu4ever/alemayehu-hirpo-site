@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState, type ReactNode } from "react";
+import Link from "next/link";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,14 @@ const initial: FormState = {
 const inputClass =
   "w-full min-h-11 px-4 py-3 bg-surface border border-border text-ivory placeholder:text-muted focus:outline-none focus:border-gold transition-colors";
 
+/** Prefer env; falls back so the form still opens a real compose window. */
+function contactInbox() {
+  return (
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() ||
+    "bookings@alemayehu-hirpo.com"
+  );
+}
+
 export function ContactForm() {
   const { t } = useLanguage();
   const [form, setForm] = useState<FormState>(initial);
@@ -40,7 +49,18 @@ export function ContactForm() {
       setError(t.formError);
       return;
     }
-    // Integration-ready: POST to /api/contact or a form service.
+
+    const typeLabel =
+      t.inquiryTypes[form.inquiryType as keyof typeof t.inquiryTypes] ||
+      form.inquiryType;
+    const subject = encodeURIComponent(
+      `[Alemayehu Hirpo] ${typeLabel} — ${form.name.trim()}`,
+    );
+    const body = encodeURIComponent(
+      `${form.message.trim()}\n\n—\n${form.name.trim()}\n${form.email.trim()}\n${typeLabel}`,
+    );
+    const href = `mailto:${contactInbox()}?subject=${subject}&body=${body}`;
+    window.location.href = href;
     setSuccess(true);
     setForm(initial);
   }
@@ -106,7 +126,7 @@ export function ContactForm() {
       </Field>
 
       {error ? (
-        <p className="text-sm text-red-400" role="alert">
+        <p className="text-sm text-ethio-red" role="alert">
           {error}
         </p>
       ) : null}
@@ -115,9 +135,11 @@ export function ContactForm() {
           {t.formSuccess}
         </p>
       ) : (
-        <p className="text-xs text-muted">
-          Form is integration-ready. Connect a backend or email service before
-          production use. See README for details.
+        <p className="text-xs text-muted leading-relaxed">
+          {t.formMailtoHint}{" "}
+          <Link href="/privacy" className="text-brass hover:text-gold">
+            {t.privacyNav}
+          </Link>
         </p>
       )}
 

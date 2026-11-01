@@ -58,25 +58,28 @@ export default function MusicPage() {
                 {featured.title.am ? (
                   <p className="amharic text-gold mb-4">{featured.title.am}</p>
                 ) : null}
-                <p className="text-muted leading-relaxed mb-6 max-w-2xl">
+                <p className="text-xs uppercase tracking-[0.22em] text-brass mb-2">
+                  The story · ታሪኩ
+                </p>
+                <p className="text-muted leading-relaxed mb-4 max-w-2xl">
                   {featured.description.en}
                 </p>
-                {featured.tracks ? (
-                  <div className="mb-6">
-                    <TrackList
-                      tracks={featured.tracks}
-                      releaseTitle={featured.title}
-                      coverImage={featured.coverImage}
-                    />
-                  </div>
+                {featured.description.am ? (
+                  <p className="amharic text-muted/90 leading-relaxed mb-6 max-w-2xl">
+                    {featured.description.am}
+                  </p>
                 ) : null}
-                <div className="flex flex-wrap gap-3">
+
+                <p className="text-xs uppercase tracking-[0.22em] text-brass mb-3">
+                  Listen · ያዳምጡ
+                </p>
+                <div className="flex flex-wrap gap-3 mb-8">
                   {featured.streaming.appleMusic ? (
                     <a
                       href={featured.streaming.appleMusic}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-3 text-sm uppercase tracking-wide border border-gold/50 text-ivory hover:border-gold hover:bg-gold/10 min-h-11"
+                      className="inline-flex items-center gap-2 px-5 py-3 text-sm uppercase tracking-wide bg-brass text-charcoal hover:brightness-110 min-h-11"
                     >
                       Apple Music <ExternalLink size={14} />
                     </a>
@@ -91,7 +94,27 @@ export default function MusicPage() {
                       SoundCloud <ExternalLink size={14} />
                     </a>
                   ) : null}
+                  {featured.streaming.youtube ? (
+                    <a
+                      href={featured.streaming.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-3 text-sm uppercase tracking-wide border border-border text-muted hover:text-ivory hover:border-brass/40 min-h-11"
+                    >
+                      YouTube <ExternalLink size={14} />
+                    </a>
+                  ) : null}
                 </div>
+
+                {featured.tracks ? (
+                  <div className="mb-2">
+                    <TrackList
+                      tracks={featured.tracks}
+                      releaseTitle={featured.title}
+                      coverImage={featured.coverImage}
+                    />
+                  </div>
+                ) : null}
               </div>
             </div>
           </Container>

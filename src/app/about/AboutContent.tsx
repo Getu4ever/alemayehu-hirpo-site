@@ -14,7 +14,24 @@ export function AboutContent() {
     <>
       <section className="section-pad">
         <Container narrow>
-          <p className={cn("text-xl md:text-2xl leading-relaxed text-cream/90", script)}>
+          <div className="flag-stripe mb-8 max-w-xs" aria-hidden>
+            <span />
+            <span />
+            <span />
+          </div>
+          <p className="text-xs uppercase tracking-[0.28em] text-brass mb-4">
+            {locale === "am" ? "መግለጫ" : "Manifesto"}
+          </p>
+          <p
+            className={cn(
+              "font-display text-2xl md:text-3xl leading-snug text-ivory mb-10",
+              script,
+            )}
+          >
+            {bilingual(artist.manifesto)}
+          </p>
+          <div className="hairline mb-10" aria-hidden />
+          <p className={cn("text-lg md:text-xl leading-relaxed text-cream/90", script)}>
             {bilingual(artist.biography.introduction)}
           </p>
         </Container>

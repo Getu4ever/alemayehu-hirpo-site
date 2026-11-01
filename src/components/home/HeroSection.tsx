@@ -44,7 +44,7 @@ export function HeroSection() {
         className="pointer-events-none absolute z-[5] select-none left-4 top-[7.5rem] w-[7.25rem] max-md:block md:left-[62%] md:top-[26%] md:w-[11rem] md:-translate-x-1/2 lg:left-[60%] lg:top-[24%] lg:w-[12.5rem] xl:left-[58%] xl:w-[13.5rem]"
         aria-hidden
       >
-        <div className="relative opacity-[0.7] md:opacity-[0.55] lg:opacity-[0.62]">
+        <div className="relative animate-gasha-float opacity-[0.7] md:opacity-[0.55] lg:opacity-[0.62]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/hero/adwa-shields.svg"

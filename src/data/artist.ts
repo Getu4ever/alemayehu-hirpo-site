@@ -39,6 +39,10 @@ export const artist = {
     en: "Ethiopian singer and songwriter whose distinctive Amharic voice has moved audiences in Ethiopia and across the diaspora.",
     am: "በኢትዮጵያ እና በስደተኛ ማህበረሰብ ዘንድ በሚያንቀሳቅስ አማርኛ ድምጹ የታወቀ ዘፋኝና የዘፈን ጸሐፊ።",
   },
+  manifesto: {
+    en: "Ethiopian soul is not a style we borrow — it is the language we sing in. From Addis stages to diaspora living rooms, Alemayehu Hirpo carries Amharic melody as memory, celebration, and belonging. This site is the official home for that sound: the records, the nights, the stories still being written.",
+    am: "የኢትዮጵያ ነፍስ የምንበደረው ዘይቤ አይደለም — የምንዘፍንበት ቋንቋ ነው። ከአዲስ አበባ መድረኮች እስከ ስደተኛ መኖሪያ ቤቶች፣ አለማየሁ ሂርጶ አማርኛ ዜማን እንደ ማስታወሻ፣ እንደ በዓል እና እንደ ትስስር ይዞ ይመጣል። ይህ ድረ-ገጽ የዚያ ድምጽ ይፋዊ መኖሪያ ነው፡ ቀረጻዎቹ፣ ምሽቶቹ፣ ገና እየተጻፉ ያሉ ታሪኮቹ።",
+  },
   biography: {
     introduction: {
       en: "Alemayehu Hirpo — widely known as Alex Hirpo — is an Ethiopian vocalist celebrated for a distinctive singing voice and a catalogue of Amharic songs that have resonated with listeners at home and abroad.",
@@ -71,9 +75,7 @@ export const artist = {
       "/images/artist/alemayehu01.jpeg",
       "/images/artist/alemayehu02.jpeg",
       "/images/artist/alemayehu03.jpeg",
-      "/images/artist/alemayehu04.jpeg",
       "/images/artist/alemayehu05.jpeg",
-      "/images/artist/alemayehu06.jpeg",
       "/images/artist/alemayehu07.jpeg",
       "/images/artist/alemayehu08.jpeg",
     ],

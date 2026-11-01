@@ -65,8 +65,20 @@ export const translations = {
     message: "Message",
     required: "Required",
     formSuccess:
-      "Thank you. Your message is ready — connect a form backend to enable delivery.",
+      "Thank you. Your email app should open with the message ready to send.",
     formError: "Please complete all required fields.",
+    formPrivacyNote:
+      "Messages are sent from your own email app. We use your details only to reply to this inquiry.",
+    formMailtoHint: "Opens your email app — nothing is stored on this site.",
+    tourEmptyTitle: "Next dates TBA",
+    tourEmptyBody:
+      "No tour dates are scheduled yet. Join Live Events for club nights, or write for booking. When the road opens, the dates will live here first.",
+    privacyTitle: "Privacy & bookings",
+    privacyNav: "Privacy",
+    videosNav: "Videos",
+    galleryNav: "Gallery",
+    listenPrimary: "Listen",
+    releaseStory: "The story",
     inquiryTypes: {
       booking: "Concert / Event Booking",
       media: "Media / Interview",
@@ -154,9 +166,20 @@ export const translations = {
     inquiryType: "የጥያቄ አይነት",
     message: "መልእክት",
     required: "አስፈላጊ",
-    formSuccess:
-      "አመሰግናለሁ። መልእክትዎ ዝግጁ ነው — ለመላክ የቅጽ አገልግሎት ማገናኘት ያስፈልጋል።",
+    formSuccess: "አመሰግናለሁ። የኢሜይል መተግበሪያዎ መልእክቱን ዝግጁ አድርጎ ሊከፍት ይገባል።",
     formError: "እባክዎ ሁሉንም አስፈላጊ መስኮች ይሙሉ።",
+    formPrivacyNote:
+      "መልእክቶች ከእርስዎ የኢሜይል መተግበሪያ ይላካሉ። መረጃዎን ለዚህ ጥያቄ መመለስ ብቻ እንጠቀማለን።",
+    formMailtoHint: "የኢሜይል መተግበሪያዎን ይከፍታል — በዚህ ድረ-ገጽ ላይ ምንም አይቀመጥም።",
+    tourEmptyTitle: "ቀጣይ ቀናት በቅርቡ",
+    tourEmptyBody:
+      "እስካሁን የጉብኝት ቀናት አልተያዙም። ለክለብ ምሽቶች Live Events ይመልከቱ፤ ለቦታ ማስያዝ ያግኙን። መንገዱ ሲከፈት ቀናቱ እዚህ መጀመሪያ ይታያሉ።",
+    privacyTitle: "ግላዊነትና ቦታ ማስያዝ",
+    privacyNav: "ግላዊነት",
+    videosNav: "ቪዲዮዎች",
+    galleryNav: "ጋለሪ",
+    listenPrimary: "ያዳምጡ",
+    releaseStory: "ታሪኩ",
     inquiryTypes: {
       booking: "ኮንሰርት / ዝግጅት ቦታ ማስያዝ",
       media: "ሚዲያ / ቃለ መጠይቅ",

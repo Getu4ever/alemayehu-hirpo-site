@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useSyncExternalStore,
   type ReactNode,
@@ -45,6 +46,10 @@ function writeLocale(next: Locale) {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const locale = useSyncExternalStore<Locale>(subscribe, readLocale, () => "en");
+
+  useEffect(() => {
+    document.documentElement.lang = locale === "am" ? "am" : "en";
+  }, [locale]);
 
   const setLocale = useCallback((next: Locale) => {
     writeLocale(next);

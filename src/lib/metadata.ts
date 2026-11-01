@@ -28,6 +28,7 @@ export function createPageMetadata({
       description,
       siteName,
       locale: "en_US",
+      alternateLocale: ["am_ET"],
       type: "website",
       images: [
         {
