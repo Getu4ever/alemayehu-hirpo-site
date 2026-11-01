@@ -278,6 +278,46 @@ export async function rejectFanSubmission(id: string) {
   return submission;
 }
 
+export async function deleteFanSubmission(id: string) {
+  const items = await readIndex();
+  const index = items.findIndex((item) => item.id === id);
+  if (index < 0) throw new Error("Submission not found.");
+  const submission = items[index]!;
+
+  assertBlobConfigured();
+
+  const pathsToDelete = new Set<string>();
+  if (submission.pendingPath) pathsToDelete.add(submission.pendingPath);
+  if (submission.pendingUrl) pathsToDelete.add(submission.pendingUrl);
+  if (submission.publicSrc) pathsToDelete.add(submission.publicSrc);
+
+  // Approved copies use a predictable pathname even if only the URL is stored.
+  const ext = extensionFor(
+    submission.mimeType,
+    submission.pendingPath || submission.originalName,
+  );
+  pathsToDelete.add(`fan-gallery/approved/${submission.id}${ext}`);
+
+  for (const target of pathsToDelete) {
+    try {
+      await del(target);
+    } catch {
+      // Blob may already be gone
+    }
+  }
+
+  items.splice(index, 1);
+  await writeIndex(items);
+
+  const approved = await readApprovedFanGallery();
+  const nextApproved = approved.filter((item) => item.id !== `fan-${id}`);
+  if (nextApproved.length !== approved.length) {
+    await writeApprovedFanGallery(nextApproved);
+  }
+
+  return { ok: true as const, id };
+}
+
 export function assertAdminAuthorized(request: Request) {
   const secret = process.env.GALLERY_ADMIN_SECRET;
   if (!secret) {

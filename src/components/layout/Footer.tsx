@@ -59,6 +59,7 @@ const columns = [
     title: { en: "Info", am: "መረጃ" },
     links: [
       { href: "/about", label: { en: "About", am: "ስለ እኔ" } },
+      { href: "/news", label: { en: "News", am: "ዜና" } },
       { href: "/gallery", label: { en: "Gallery", am: "ጋለሪ" } },
       { href: "/contact", label: { en: "Contact", am: "ያግኙን" } },
     ],

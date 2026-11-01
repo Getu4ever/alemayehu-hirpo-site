@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { LatestMusic } from "@/components/home/LatestMusic";
 import { ArtistIntroduction } from "@/components/home/ArtistIntroduction";
 import { EventsPreview } from "@/components/home/EventsPreview";
+import { NewsPreview } from "@/components/home/NewsPreview";
 import { MerchPreview } from "@/components/home/MerchPreview";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
 import { createPageMetadata } from "@/lib/metadata";
@@ -21,6 +22,7 @@ export default function HomePage() {
       <LatestMusic />
       <ArtistIntroduction />
       <EventsPreview />
+      <NewsPreview />
       <Suspense fallback={null}>
         <MerchPreview />
       </Suspense>

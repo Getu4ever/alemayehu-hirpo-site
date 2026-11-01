@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import {
   approveFanSubmission,
   assertAdminAuthorized,
+  deleteFanSubmission,
   listFanSubmissions,
   rejectFanSubmission,
 } from "@/lib/fan-gallery";
@@ -29,13 +30,18 @@ export async function POST(request: Request) {
     assertAdminAuthorized(request);
     const body = (await request.json()) as {
       id?: string;
-      action?: "approve" | "reject";
+      action?: "approve" | "reject" | "delete";
     };
     if (!body.id || !body.action) {
       return NextResponse.json(
         { error: "id and action are required." },
         { status: 400 },
       );
+    }
+
+    if (body.action === "delete") {
+      const result = await deleteFanSubmission(body.id);
+      return NextResponse.json(result);
     }
 
     const submission =
