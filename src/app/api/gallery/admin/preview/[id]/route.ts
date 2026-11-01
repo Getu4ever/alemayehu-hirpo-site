@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
-import {
-  assertAdminAuthorized,
-  getFanSubmission,
-} from "@/lib/fan-gallery";
+import { assertAdminAuthorized } from "@/lib/admin-auth";
+import { getFanSubmission } from "@/lib/fan-gallery";
 
 export async function GET(
   request: Request,

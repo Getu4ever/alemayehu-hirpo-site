@@ -30,8 +30,8 @@ const tools = [
 export default function AdminPage() {
   return (
     <AdminGate
-      title="Site admin"
-      description="Enter the admin secret (GALLERY_ADMIN_SECRET) to manage fan photos and open site control tools."
+      title="Command room"
+      description="Private control for Alemayehu’s site — unlock with your admin password to moderate fan photos and jump to key pages."
     >
       {(secret, lock) => (
         <main className="min-h-screen bg-background text-ivory px-4 py-12 sm:px-8">

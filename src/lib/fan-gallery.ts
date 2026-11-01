@@ -318,17 +318,3 @@ export async function deleteFanSubmission(id: string) {
   return { ok: true as const, id };
 }
 
-export function assertAdminAuthorized(request: Request) {
-  const secret = process.env.GALLERY_ADMIN_SECRET;
-  if (!secret) {
-    throw new Error(
-      "GALLERY_ADMIN_SECRET is not set. Add it to .env.local to enable moderation.",
-    );
-  }
-  const header = request.headers.get("x-gallery-admin-secret");
-  const url = new URL(request.url);
-  const query = url.searchParams.get("secret");
-  if (header !== secret && query !== secret) {
-    throw new Error("Unauthorized");
-  }
-}

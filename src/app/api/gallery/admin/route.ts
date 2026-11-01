@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
+import { assertAdminAuthorized } from "@/lib/admin-auth";
 import {
   approveFanSubmission,
-  assertAdminAuthorized,
   deleteFanSubmission,
   listFanSubmissions,
   rejectFanSubmission,

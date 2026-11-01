@@ -24,7 +24,7 @@ export function FanGalleryPanel({ secret }: { secret: string }) {
         nextTab === "all" ? "status=all" : `status=${encodeURIComponent(nextTab)}`;
       const res = await fetch(
         `/api/gallery/admin?${query}&secret=${encodeURIComponent(secret)}`,
-        { headers: { "x-gallery-admin-secret": secret } },
+        { headers: { "x-admin-secret": secret } },
       );
       const data = (await res.json()) as {
         items?: FanSubmission[];
@@ -60,7 +60,7 @@ export function FanGalleryPanel({ secret }: { secret: string }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-gallery-admin-secret": secret,
+          "x-admin-secret": secret,
         },
         body: JSON.stringify({ id, action }),
       });
