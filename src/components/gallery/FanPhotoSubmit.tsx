@@ -1,12 +1,18 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { Upload } from "lucide-react";
+import { FormEvent, useEffect, useState } from "react";
+import { Upload, X } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { Button } from "@/components/ui/Button";
+import { MAX_FAN_PHOTOS } from "@/lib/fan-gallery-constants";
 
 const inputClass =
   "w-full min-h-11 px-4 py-3 bg-surface border border-border text-ivory placeholder:text-muted focus:outline-none focus:border-brass transition-colors";
+
+type PreviewItem = {
+  file: File;
+  url: string;
+};
 
 export function FanPhotoSubmit() {
   const { locale } = useLanguage();
@@ -15,18 +21,68 @@ export function FanPhotoSubmit() {
   const [email, setEmail] = useState("");
   const [caption, setCaption] = useState("");
   const [consent, setConsent] = useState(false);
-  const [photo, setPhoto] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [photos, setPhotos] = useState<PreviewItem[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
-  function onFileChange(file: File | null) {
-    setPhoto(file);
+  useEffect(() => {
+    return () => {
+      photos.forEach((p) => URL.revokeObjectURL(p.url));
+    };
+    // Only revoke on unmount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function addFiles(list: FileList | null) {
+    if (!list?.length) return;
     setError(null);
     setSuccess(null);
-    if (preview) URL.revokeObjectURL(preview);
-    setPreview(file ? URL.createObjectURL(file) : null);
+
+    const incoming = Array.from(list);
+    setPhotos((prev) => {
+      const room = MAX_FAN_PHOTOS - prev.length;
+      if (room <= 0) {
+        setError(
+          am
+            ? `እስከ ${MAX_FAN_PHOTOS} ፎቶዎች ብቻ ማከል ይችላሉ።`
+            : `You can add up to ${MAX_FAN_PHOTOS} photos.`,
+        );
+        return prev;
+      }
+      const nextFiles = incoming.slice(0, room);
+      if (incoming.length > room) {
+        setError(
+          am
+            ? `እስከ ${MAX_FAN_PHOTOS} ፎቶዎች ብቻ። ተጨማሪዎቹ ተትተዋል።`
+            : `Only ${MAX_FAN_PHOTOS} photos allowed. Extra files were skipped.`,
+        );
+      }
+      return [
+        ...prev,
+        ...nextFiles.map((file) => ({
+          file,
+          url: URL.createObjectURL(file),
+        })),
+      ];
+    });
+  }
+
+  function removePhoto(index: number) {
+    setPhotos((prev) => {
+      const target = prev[index];
+      if (target) URL.revokeObjectURL(target.url);
+      return prev.filter((_, i) => i !== index);
+    });
+    setError(null);
+    setSuccess(null);
+  }
+
+  function clearPhotos() {
+    setPhotos((prev) => {
+      prev.forEach((p) => URL.revokeObjectURL(p.url));
+      return [];
+    });
   }
 
   async function onSubmit(e: FormEvent) {
@@ -34,11 +90,11 @@ export function FanPhotoSubmit() {
     setError(null);
     setSuccess(null);
 
-    if (!name.trim() || !email.trim() || !photo || !consent) {
+    if (!name.trim() || !email.trim() || !photos.length || !consent) {
       setError(
         am
-          ? "እባክዎ ስም፣ ኢሜይል፣ ፎቶ እና ፈቃድ ያረጋግጡ።"
-          : "Please add your name, email, photo, and consent.",
+          ? "እባክዎ ስም፣ ኢሜይል፣ ቢያንስ አንድ ፎቶ እና ፈቃድ ያረጋግጡ።"
+          : "Please add your name, email, at least one photo, and consent.",
       );
       return;
     }
@@ -48,7 +104,7 @@ export function FanPhotoSubmit() {
     body.set("email", email);
     body.set("caption", caption);
     body.set("consent", "true");
-    body.set("photo", photo);
+    photos.forEach((p) => body.append("photos", p.file));
 
     setPending(true);
     try {
@@ -64,14 +120,14 @@ export function FanPhotoSubmit() {
       setSuccess(
         data.message ||
           (am
-            ? "አመሰግናለሁ። ፎቶዎ ተቀብሏል፤ ከአስተዳዳሪ ማረጋገጫ በኋላ በጋለሪ ይታያል።"
-            : "Thank you. Your photo was received and will appear after admin approval."),
+            ? "አመሰግናለሁ። ፎቶዎችዎ ተቀብለዋል፤ ከአስተዳዳሪ ማረጋገጫ በኋላ በጋለሪ ይታያሉ።"
+            : "Thank you. Your photos were received and will appear after admin approval."),
       );
       setName("");
       setEmail("");
       setCaption("");
       setConsent(false);
-      onFileChange(null);
+      clearPhotos();
     } catch {
       setError(am ? "የአውታረ መረብ ስህተት። እንደገና ይሞክሩ።" : "Network error. Please try again.");
     } finally {
@@ -91,8 +147,8 @@ export function FanPhotoSubmit() {
           </h2>
           <p className="text-muted leading-relaxed max-w-xl">
             {am
-              ? "ከአለማየሁ ሂርጶ ጋር የተነሳፉ፣ የድሮ ትውስታዎች ወይም የመድረክ ፎቶዎች ካሉዎት እዚህ ይላኩ። ከአስተዳዳሪ ማረጋገጫ በኋላ በጋለሪው «ከደጋፊዎች» ክፍል ይታያሉ።"
-              : "Have an old photo with Alemayehu Hirpo — a meet-and-greet, concert memory, or family keepsake? Share it here. After admin approval, it will be posted in the From Fans gallery."}
+              ? "ከአለማየሁ ሂርጶ ጋር የተነሳፉ፣ የድሮ ትውስታዎች ወይም የመድረክ ፎቶዎች ካሉዎት እዚህ ይላኩ። እስከ አስር ፎቶዎች በአንድ ጊዜ ማከል ይችላሉ። ከአስተዳዳሪ ማረጋገጫ በኋላ በጋለሪው «ከደጋፊዎች» ክፍል ይታያሉ።"
+              : "Have old photos with Alemayehu Hirpo — meet-and-greets, concert memories, or family keepsakes? Share up to ten at once. After admin approval, they will be posted in the From Fans gallery."}
           </p>
         </div>
 
@@ -137,39 +193,64 @@ export function FanPhotoSubmit() {
               className={`${inputClass} min-h-[6rem] resize-y`}
               placeholder={
                 am
-                  ? "ይህ ፎቶ የተነሳው መቼ ነው? ታሪኩን ያጋሩ…"
-                  : "When was this taken? Tell the story…"
+                  ? "እነዚህ ፎቶዎች የተነሱት መቼ ነው? ታሪኩን ያጋሩ…"
+                  : "When were these taken? Tell the story…"
               }
             />
           </label>
 
           <div>
             <span className="block text-xs uppercase tracking-[0.16em] text-brass mb-2">
-              {am ? "ፎቶ" : "Photo"} *
+              {am
+                ? `ፎቶዎች (እስከ ${MAX_FAN_PHOTOS}) *`
+                : `Photos (up to ${MAX_FAN_PHOTOS}) *`}
             </span>
             <label className="flex cursor-pointer flex-col items-center justify-center gap-3 border border-dashed border-border bg-charcoal/40 px-4 py-8 text-center transition-colors hover:border-brass/50">
               <Upload className="text-brass" size={22} />
               <span className="text-sm text-ivory/80">
-                {photo
-                  ? photo.name
+                {photos.length
+                  ? am
+                    ? `${photos.length} / ${MAX_FAN_PHOTOS} ተመርጠዋል — ተጨማሪ ለማከል ይጫኑ`
+                    : `${photos.length} / ${MAX_FAN_PHOTOS} selected — click to add more`
                   : am
-                    ? "JPG, PNG, WEBP ወይም GIF (እስከ 6MB)"
-                    : "JPG, PNG, WEBP, or GIF (max 6MB)"}
+                    ? "JPG, PNG, WEBP ወይም GIF (እያንዳንዱ እስከ 6MB)"
+                    : "JPG, PNG, WEBP, or GIF (max 6MB each)"}
               </span>
               <input
                 type="file"
                 accept="image/jpeg,image/png,image/webp,image/gif"
+                multiple
                 className="sr-only"
-                onChange={(e) => onFileChange(e.target.files?.[0] ?? null)}
+                onChange={(e) => {
+                  addFiles(e.target.files);
+                  e.target.value = "";
+                }}
               />
             </label>
-            {preview ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={preview}
-                alt=""
-                className="mt-4 max-h-48 w-auto border border-border object-contain"
-              />
+            {photos.length ? (
+              <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+                {photos.map((item, index) => (
+                  <li
+                    key={`${item.file.name}-${item.file.size}-${index}`}
+                    className="relative border border-border bg-charcoal/50"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.url}
+                      alt=""
+                      className="aspect-square w-full object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removePhoto(index)}
+                      className="absolute right-1 top-1 flex h-7 w-7 items-center justify-center bg-charcoal/85 text-ivory hover:text-brass"
+                      aria-label={am ? "ፎቶ አስወግድ" : "Remove photo"}
+                    >
+                      <X size={14} />
+                    </button>
+                  </li>
+                ))}
+              </ul>
             ) : null}
           </div>
 
@@ -183,8 +264,8 @@ export function FanPhotoSubmit() {
             />
             <span>
               {am
-                ? "ይህን ፎቶ ለማጋራት ፈቃድ አለኝ፤ በይፋዊ ጋለሪ ላይ እንዲታይ እስማማለሁ።"
-                : "I have the right to share this photo and agree it may be shown in the official gallery after approval."}
+                ? "እነዚህን ፎቶዎች ለማጋራት ፈቃድ አለኝ፤ በይፋዊ ጋለሪ ላይ እንዲታዩ እስማማለሁ።"
+                : "I have the right to share these photos and agree they may be shown in the official gallery after approval."}
             </span>
           </label>
 

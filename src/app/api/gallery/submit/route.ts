@@ -1,5 +1,17 @@
 import { NextResponse } from "next/server";
-import { createFanSubmission, validateFanUpload } from "@/lib/fan-gallery";
+import { MAX_FAN_PHOTOS } from "@/lib/fan-gallery-constants";
+import { createFanSubmissions, validateFanUpload } from "@/lib/fan-gallery";
+
+function collectPhotos(form: FormData): File[] {
+  const files: File[] = [];
+  for (const value of form.getAll("photos")) {
+    if (value instanceof File && value.size > 0) files.push(value);
+  }
+  // Backward-compatible single-file field
+  const single = form.get("photo");
+  if (single instanceof File && single.size > 0) files.push(single);
+  return files;
+}
 
 export async function POST(request: Request) {
   try {
@@ -8,7 +20,7 @@ export async function POST(request: Request) {
     const email = String(form.get("email") ?? "");
     const caption = String(form.get("caption") ?? "");
     const consent = String(form.get("consent") ?? "");
-    const file = form.get("photo");
+    const files = collectPhotos(form);
 
     if (!name.trim() || !email.trim()) {
       return NextResponse.json(
@@ -22,30 +34,45 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-    if (!(file instanceof File) || file.size === 0) {
+    if (!files.length) {
       return NextResponse.json(
-        { error: "Please choose a photo to upload." },
+        { error: "Please choose at least one photo to upload." },
+        { status: 400 },
+      );
+    }
+    if (files.length > MAX_FAN_PHOTOS) {
+      return NextResponse.json(
+        { error: `You can upload up to ${MAX_FAN_PHOTOS} photos at once.` },
         { status: 400 },
       );
     }
 
-    const uploadError = validateFanUpload(file);
-    if (uploadError) {
-      return NextResponse.json({ error: uploadError }, { status: 400 });
+    for (const file of files) {
+      const uploadError = validateFanUpload(file);
+      if (uploadError) {
+        return NextResponse.json(
+          { error: `${file.name}: ${uploadError}` },
+          { status: 400 },
+        );
+      }
     }
 
-    const submission = await createFanSubmission({
+    const submissions = await createFanSubmissions({
       name,
       email,
       caption,
-      file,
+      files,
     });
 
+    const count = submissions.length;
     return NextResponse.json({
       ok: true,
-      id: submission.id,
+      ids: submissions.map((s) => s.id),
+      count,
       message:
-        "Thank you. Your photo was received and will appear in the gallery after admin approval.",
+        count === 1
+          ? "Thank you. Your photo was received and will appear in the gallery after admin approval."
+          : `Thank you. ${count} photos were received and will appear in the gallery after admin approval.`,
     });
   } catch (error) {
     const message =

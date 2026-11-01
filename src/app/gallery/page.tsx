@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { createPageMetadata } from "@/lib/metadata";
 import { artist } from "@/data/artist";
 import { readApprovedFanGallery } from "@/lib/fan-gallery";
@@ -14,6 +15,8 @@ export const metadata = createPageMetadata({
 });
 
 async function ApprovedFanGallery() {
+  // Blob list is request-time; avoid prerender Date.now() from the SDK.
+  await connection();
   const fanItems = await readApprovedFanGallery();
   return <GalleryGrid fanItems={fanItems} />;
 }

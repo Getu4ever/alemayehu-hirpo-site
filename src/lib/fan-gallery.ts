@@ -1,6 +1,9 @@
 import { randomUUID } from "crypto";
 import { put, list, del } from "@vercel/blob";
 import type { GalleryItem } from "@/data/gallery";
+import { MAX_FAN_PHOTOS } from "@/lib/fan-gallery-constants";
+
+export { MAX_FAN_PHOTOS } from "@/lib/fan-gallery-constants";
 
 export type FanSubmissionStatus = "pending" | "approved" | "rejected";
 
@@ -124,38 +127,64 @@ export async function createFanSubmission(input: {
   caption: string;
   file: File;
 }): Promise<FanSubmission> {
-  const error = validateFanUpload(input.file);
-  if (error) throw new Error(error);
+  const [submission] = await createFanSubmissions({
+    ...input,
+    files: [input.file],
+  });
+  return submission;
+}
+
+export async function createFanSubmissions(input: {
+  name: string;
+  email: string;
+  caption: string;
+  files: File[];
+}): Promise<FanSubmission[]> {
+  if (!input.files.length) {
+    throw new Error("Please choose at least one photo to upload.");
+  }
+  if (input.files.length > MAX_FAN_PHOTOS) {
+    throw new Error(`You can upload up to ${MAX_FAN_PHOTOS} photos at once.`);
+  }
+
+  for (const file of input.files) {
+    const error = validateFanUpload(file);
+    if (error) throw new Error(`${file.name}: ${error}`);
+  }
+
   assertBlobConfigured();
 
-  const id = randomUUID();
-  const ext = extensionFor(input.file.type, input.file.name);
-  const pendingPath = `fan-gallery/pending/${id}${ext}`;
-  const blob = await put(pendingPath, input.file, {
-    access: "public",
-    contentType: input.file.type,
-    addRandomSuffix: false,
-  });
+  const created: FanSubmission[] = [];
+  for (const file of input.files) {
+    const id = randomUUID();
+    const ext = extensionFor(file.type, file.name);
+    const pendingPath = `fan-gallery/pending/${id}${ext}`;
+    const blob = await put(pendingPath, file, {
+      access: "public",
+      contentType: file.type,
+      addRandomSuffix: false,
+    });
 
-  const submission: FanSubmission = {
-    id,
-    status: "pending",
-    name: input.name.trim(),
-    email: input.email.trim().toLowerCase(),
-    caption: input.caption.trim(),
-    originalName: input.file.name,
-    mimeType: input.file.type,
-    createdAt: new Date().toISOString(),
-    pendingPath,
-    pendingUrl: blob.url,
-    width: 1200,
-    height: 1600,
-  };
+    created.push({
+      id,
+      status: "pending",
+      name: input.name.trim(),
+      email: input.email.trim().toLowerCase(),
+      caption: input.caption.trim(),
+      originalName: file.name,
+      mimeType: file.type,
+      createdAt: new Date().toISOString(),
+      pendingPath,
+      pendingUrl: blob.url,
+      width: 1200,
+      height: 1600,
+    });
+  }
 
   const items = await readIndex();
-  items.unshift(submission);
+  items.unshift(...created);
   await writeIndex(items);
-  return submission;
+  return created;
 }
 
 export async function listFanSubmissions(status?: FanSubmissionStatus) {
