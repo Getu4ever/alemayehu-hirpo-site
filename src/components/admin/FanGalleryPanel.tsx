@@ -3,23 +3,32 @@
 import { useCallback, useEffect, useState } from "react";
 import type { FanSubmission } from "@/lib/fan-gallery";
 
-type Tab = "pending" | "approved" | "rejected";
+type Tab = "all" | "pending" | "approved" | "rejected";
 
 export function FanGalleryPanel({ secret }: { secret: string }) {
-  const [tab, setTab] = useState<Tab>("pending");
+  const [tab, setTab] = useState<Tab>("all");
   const [items, setItems] = useState<FanSubmission[]>([]);
+  const [counts, setCounts] = useState({
+    all: 0,
+    pending: 0,
+    approved: 0,
+    rejected: 0,
+  });
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
 
   const load = useCallback(
     async (nextTab: Tab = tab) => {
       setError(null);
+      const query =
+        nextTab === "all" ? "status=all" : `status=${encodeURIComponent(nextTab)}`;
       const res = await fetch(
-        `/api/gallery/admin?status=${nextTab}&secret=${encodeURIComponent(secret)}`,
+        `/api/gallery/admin?${query}&secret=${encodeURIComponent(secret)}`,
         { headers: { "x-gallery-admin-secret": secret } },
       );
       const data = (await res.json()) as {
         items?: FanSubmission[];
+        counts?: typeof counts;
         error?: string;
       };
       if (!res.ok) {
@@ -27,6 +36,7 @@ export function FanGalleryPanel({ secret }: { secret: string }) {
         return;
       }
       setItems(data.items ?? []);
+      if (data.counts) setCounts(data.counts);
     },
     [secret, tab],
   );
@@ -76,12 +86,12 @@ export function FanGalleryPanel({ secret }: { secret: string }) {
             Photo submissions
           </h2>
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            Approve photos to publish them in the public gallery, reject spam, or
-            permanently delete posted images.
+            All fan uploads appear here. Approve to publish, reject spam, or
+            permanently delete any submission.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          {(["pending", "approved", "rejected"] as Tab[]).map((id) => (
+          {(["all", "pending", "approved", "rejected"] as Tab[]).map((id) => (
             <button
               key={id}
               type="button"
@@ -93,6 +103,7 @@ export function FanGalleryPanel({ secret }: { secret: string }) {
               }`}
             >
               {id}
+              <span className="ml-2 text-brass/80">{counts[id]}</span>
             </button>
           ))}
         </div>
@@ -101,7 +112,11 @@ export function FanGalleryPanel({ secret }: { secret: string }) {
       {error ? <p className="text-sm text-ethio-red">{error}</p> : null}
 
       {!items.length ? (
-        <p className="text-muted">No {tab} submissions.</p>
+        <p className="text-muted">
+          {tab === "all"
+            ? "No fan photos have been submitted yet."
+            : `No ${tab} submissions.`}
+        </p>
       ) : (
         <ul className="space-y-6">
           {items.map((item) => (
@@ -120,7 +135,12 @@ export function FanGalleryPanel({ secret }: { secret: string }) {
                 className="h-44 w-full object-cover border border-border"
               />
               <div>
-                <p className="font-display text-xl text-ivory">{item.name}</p>
+                <div className="flex flex-wrap items-center gap-3">
+                  <p className="font-display text-xl text-ivory">{item.name}</p>
+                  <span className="text-[0.65rem] uppercase tracking-[0.16em] text-brass border border-brass/30 px-2 py-1">
+                    {item.status}
+                  </span>
+                </div>
                 <p className="text-sm text-muted">{item.email}</p>
                 <p className="mt-3 text-sm text-ivory/85 leading-relaxed">
                   {item.caption || "No caption provided."}
@@ -149,22 +169,16 @@ export function FanGalleryPanel({ secret }: { secret: string }) {
                         Reject
                       </button>
                     </>
-                  ) : (
-                    <p className="self-center text-xs uppercase tracking-[0.16em] text-brass">
-                      {item.status}
-                    </p>
-                  )}
+                  ) : null}
 
-                  {(item.status === "approved" || item.status === "rejected") && (
-                    <button
-                      type="button"
-                      disabled={busyId === item.id}
-                      onClick={() => void moderate(item.id, "delete")}
-                      className="min-h-10 px-4 border border-ethio-red/50 text-sm uppercase tracking-wide text-ethio-red hover:bg-ethio-red/10 disabled:opacity-60"
-                    >
-                      Delete permanently
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    disabled={busyId === item.id}
+                    onClick={() => void moderate(item.id, "delete")}
+                    className="min-h-10 px-4 border border-ethio-red/50 text-sm uppercase tracking-wide text-ethio-red hover:bg-ethio-red/10 disabled:opacity-60"
+                  >
+                    Delete permanently
+                  </button>
                 </div>
               </div>
             </li>

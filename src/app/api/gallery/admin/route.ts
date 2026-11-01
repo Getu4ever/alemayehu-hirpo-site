@@ -11,13 +11,24 @@ export async function GET(request: Request) {
   try {
     assertAdminAuthorized(request);
     const url = new URL(request.url);
-    const status = url.searchParams.get("status") as
-      | "pending"
-      | "approved"
-      | "rejected"
-      | null;
-    const items = await listFanSubmissions(status ?? undefined);
-    return NextResponse.json({ items });
+    const statusParam = url.searchParams.get("status");
+    const status =
+      statusParam === "pending" ||
+      statusParam === "approved" ||
+      statusParam === "rejected"
+        ? statusParam
+        : undefined;
+
+    const all = await listFanSubmissions();
+    const items = status ? all.filter((item) => item.status === status) : all;
+    const counts = {
+      all: all.length,
+      pending: all.filter((item) => item.status === "pending").length,
+      approved: all.filter((item) => item.status === "approved").length,
+      rejected: all.filter((item) => item.status === "rejected").length,
+    };
+
+    return NextResponse.json({ items, counts });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unauthorized";
     const status = message === "Unauthorized" ? 401 : 500;
