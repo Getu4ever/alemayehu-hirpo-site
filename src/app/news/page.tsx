@@ -1,6 +1,8 @@
+import { Suspense } from "react";
+import { connection } from "next/server";
 import { createPageMetadata } from "@/lib/metadata";
 import { artist } from "@/data/artist";
-import { newsArticles } from "@/data/news";
+import { getAllNewsArticles } from "@/lib/news-store";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container } from "@/components/ui/Container";
 import { NewsPageContent } from "./NewsPageContent";
@@ -10,6 +12,12 @@ export const metadata = createPageMetadata({
   description: `Official news and announcements from ${artist.name.en}.`,
   path: "/news",
 });
+
+async function LiveNewsList() {
+  await connection();
+  const articles = await getAllNewsArticles();
+  return <NewsPageContent articles={articles} />;
+}
 
 export default function NewsPage() {
   return (
@@ -26,7 +34,9 @@ export default function NewsPage() {
       />
       <section className="section-pad pt-0">
         <Container>
-          <NewsPageContent articles={newsArticles} />
+          <Suspense fallback={<NewsPageContent articles={[]} />}>
+            <LiveNewsList />
+          </Suspense>
         </Container>
       </section>
     </>

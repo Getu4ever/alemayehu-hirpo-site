@@ -3,8 +3,14 @@
 import Link from "next/link";
 import { AdminGate } from "@/components/admin/AdminGate";
 import { FanGalleryPanel } from "@/components/admin/FanGalleryPanel";
+import { NewsPanel } from "@/components/admin/NewsPanel";
 
 const tools = [
+  {
+    href: "#news-desk",
+    title: "Post news",
+    body: "Write and publish announcements to the public News page.",
+  },
   {
     href: "#fan-gallery",
     title: "Fan photo submissions",
@@ -12,18 +18,13 @@ const tools = [
   },
   {
     href: "/news",
-    title: "News & announcements",
-    body: "Read the public news page. New articles are published from the site codebase for now.",
+    title: "Public news",
+    body: "Preview how posts appear to visitors.",
   },
   {
     href: "/gallery",
     title: "Public gallery",
-    body: "Preview how approved fan photos appear on the live gallery page.",
-  },
-  {
-    href: "/shop",
-    title: "Shop catalogue",
-    body: "Check Printify-powered merch as visitors see it.",
+    body: "Preview approved fan photos on the live gallery page.",
   },
 ] as const;
 
@@ -31,7 +32,7 @@ export default function AdminPage() {
   return (
     <AdminGate
       title="Command room"
-      description="Private control for Alemayehu’s site — unlock with your admin password to moderate fan photos and jump to key pages."
+      description="Private control for Alemayehu’s site — unlock with your admin password to publish news and moderate fan photos."
     >
       {(secret, lock) => (
         <main className="min-h-screen bg-background text-ivory px-4 py-12 sm:px-8">
@@ -45,8 +46,8 @@ export default function AdminPage() {
                   Admin control
                 </h1>
                 <p className="mt-2 max-w-2xl text-sm text-muted">
-                  Manage community submissions and jump to key public pages. Keep
-                  this URL private — it is protected by your admin secret only.
+                  Publish news, manage fan submissions, and jump to key public
+                  pages. Keep this URL private.
                 </p>
               </div>
               <button
@@ -75,6 +76,10 @@ export default function AdminPage() {
                 ))}
               </div>
             </section>
+
+            <div id="news-desk">
+              <NewsPanel secret={secret} />
+            </div>
 
             <div id="fan-gallery">
               <FanGalleryPanel secret={secret} />

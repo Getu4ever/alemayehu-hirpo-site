@@ -1,3 +1,10 @@
+export type NewsCategory =
+  | "release"
+  | "tour"
+  | "interview"
+  | "announcement"
+  | "press";
+
 export type NewsArticle = {
   id: string;
   slug: string;
@@ -6,12 +13,13 @@ export type NewsArticle = {
   body: { en: string; am: string };
   coverImage: string;
   publishedAt: string | null;
-  category: "release" | "tour" | "interview" | "announcement" | "press";
+  category: NewsCategory;
   featured?: boolean;
   verified: boolean;
 };
 
-export const newsArticles: NewsArticle[] = [
+/** Built-in seed posts (always available even before Blob posts exist). */
+export const seedNewsArticles: NewsArticle[] = [
   {
     id: "new-album-2026",
     slug: "alemayehu-hirpo-working-on-new-album-2026",
@@ -47,10 +55,34 @@ Thank you for your patience and continued support — the new music is coming.`,
   },
 ];
 
-export function getFeaturedArticle() {
-  return newsArticles.find((a) => a.featured) ?? newsArticles[0];
-}
+/** @deprecated Prefer getAllNewsArticles() for live + seed posts */
+export const newsArticles = seedNewsArticles;
 
-export function getArticleBySlug(slug: string) {
-  return newsArticles.find((a) => a.slug === slug);
+export const NEWS_CATEGORIES: NewsCategory[] = [
+  "release",
+  "tour",
+  "interview",
+  "announcement",
+  "press",
+];
+
+export const NEWS_COVER_OPTIONS = [
+  { value: "/images/artist/alemayehu01.jpeg", label: "Portrait 01" },
+  { value: "/images/artist/alemayehu02.jpeg", label: "Portrait 02" },
+  { value: "/images/artist/alemayehu03.jpeg", label: "Portrait 03" },
+  { value: "/images/artist/alemayehu04.jpeg", label: "Portrait 04" },
+  { value: "/images/artist/alemayehu05.jpeg", label: "Portrait 05" },
+  { value: "/images/artist/alemayehu06.jpeg", label: "Portrait 06" },
+  { value: "/images/artist/alemayehu07.jpeg", label: "Portrait 07" },
+  { value: "/images/artist/alemayehu08.jpeg", label: "Portrait 08" },
+] as const;
+
+export function slugifyNewsTitle(title: string) {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/['’]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
 }

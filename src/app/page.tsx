@@ -22,7 +22,9 @@ export default function HomePage() {
       <LatestMusic />
       <ArtistIntroduction />
       <EventsPreview />
-      <NewsPreview />
+      <Suspense fallback={null}>
+        <NewsPreview />
+      </Suspense>
       <Suspense fallback={null}>
         <MerchPreview />
       </Suspense>
